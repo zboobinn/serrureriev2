@@ -34,10 +34,7 @@ export default function Home() {
   return (
     <>
       <JsonLd
-        schema={[
-          localBusinessSchema({ includeReviews: true }),
-          faqSchema(breadcrumbFaqItems),
-        ]}
+        schema={[localBusinessSchema(), faqSchema(breadcrumbFaqItems)]}
       />
 
       {/* Hero */}

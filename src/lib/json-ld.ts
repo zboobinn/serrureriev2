@@ -9,7 +9,6 @@
 
 import { SITE, addressInline, socialLinks } from "@/data/site";
 import { zones } from "@/data/zones";
-import { reviews, averageRating, reviewCount } from "@/data/reviews";
 
 /** Objet JSON-LD générique. */
 export type JsonLdObject = Record<string, unknown>;
@@ -60,16 +59,11 @@ const defaultAreaServed = (): JsonLdObject[] =>
  * faire varier `url` avec la page courante — ce serait un signal contradictoire
  * pour Google sur l'URL canonique de l'entité.
  *
- * @param options.areaServed     Restreint la zone desservie (pages zone). Par
- *                               défaut : toutes les zones connues.
- * @param options.includeReviews N'ajoute `aggregateRating`/`review` que sur
- *                               la page où les avis sont réellement affichés
- *                               (l'accueil) — jamais sur une page où ils ne
- *                               sont pas visibles à l'écran.
+ * @param options.areaServed  Restreint la zone desservie (pages zone). Par
+ *                            défaut : toutes les zones connues.
  */
 export function localBusinessSchema(options?: {
   areaServed?: JsonLdObject[];
-  includeReviews?: boolean;
 }): JsonLdObject {
   const geoAvailable =
     SITE.geo.latitude !== null && SITE.geo.longitude !== null;
@@ -98,29 +92,45 @@ export function localBusinessSchema(options?: {
     foundingDate: String(SITE.foundingYear),
     ...(socialLinks.length > 0 ? { sameAs: socialLinks } : {}),
     description: `Serrurier à Lyon et dans le Grand Lyon depuis ${SITE.foundingYear}. Dépannage d'urgence 24h/24 7j/7, portes blindées, serrures haute sécurité. ${addressInline}.`,
-    ...(options?.includeReviews
-      ? {
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: averageRating,
-            reviewCount,
-            bestRating: 5,
-          },
-          review: reviews.map((r) => ({
-            "@type": "Review",
-            author: { "@type": "Person", name: r.author },
-            datePublished: r.date,
-            reviewRating: {
-              "@type": "Rating",
-              ratingValue: r.rating,
-              bestRating: 5,
-            },
-            reviewBody: r.text,
-          })),
-        }
-      : {}),
   };
 }
+
+/*
+ * ⚠️ AggregateRating / Review désactivés intentionnellement (non réactivé
+ * sans discussion).
+ *
+ * Les 10 avis affichés sur l'accueil (@/data/reviews.ts) sont des avis
+ * Google recopiés manuellement — pas des avis first-party collectés
+ * directement sur ce site. Google déconseille explicitement de baliser en
+ * `AggregateRating`/`Review` des avis qui ne proviennent pas d'un système de
+ * collecte propre au site (avis "self-serving"). Les avis restent affichés
+ * visuellement (bénéfice conversion, voir app/page.tsx) mais SANS balisage
+ * structuré associé.
+ *
+ * Pour réactiver le jour où un système d'avis first-party existe (widget de
+ * collecte sur le site, ou plateforme tierce dont le balisage est autorisé),
+ * réintégrer ce bloc dans le `return` de `localBusinessSchema`, derrière un
+ * flag explicite `includeReviews`, en n'important `reviews`/`averageRating`/
+ * `reviewCount` depuis `@/data/reviews` qu'à ce moment-là :
+ *
+ *   ...(options?.includeReviews
+ *     ? {
+ *         aggregateRating: {
+ *           "@type": "AggregateRating",
+ *           ratingValue: averageRating,
+ *           reviewCount,
+ *           bestRating: 5,
+ *         },
+ *         review: reviews.map((r) => ({
+ *           "@type": "Review",
+ *           author: { "@type": "Person", name: r.author },
+ *           datePublished: r.date,
+ *           reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
+ *           reviewBody: r.text,
+ *         })),
+ *       }
+ *     : {}),
+ */
 
 /**
  * Schéma `Service` — utilisé sur chaque page service.
