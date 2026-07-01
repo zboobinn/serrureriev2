@@ -80,7 +80,6 @@ export default async function ZonePage({
         schema={[
           localBusinessSchema({
             areaServed: [{ "@type": "City", name: zone.nomComplet }],
-            url: zoneHref(zone),
           }),
           breadcrumbSchema(breadcrumbItems),
         ]}

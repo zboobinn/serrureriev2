@@ -53,14 +53,17 @@ const defaultAreaServed = (): JsonLdObject[] =>
 /**
  * Schéma `LocalBusiness` / `Locksmith` — carte d'identité de l'entreprise.
  *
+ * Ce schéma est répété sur plusieurs pages (accueil, pages zone) mais
+ * représente TOUJOURS la même entité : `@id` et `url` restent donc constants
+ * (ancrés sur l'accueil) quelle que soit la page qui l'injecte. Ne jamais
+ * faire varier `url` avec la page courante — ce serait un signal contradictoire
+ * pour Google sur l'URL canonique de l'entité.
+ *
  * @param options.areaServed  Restreint la zone desservie (pages zone). Par
  *                            défaut : toutes les zones connues.
- * @param options.id          `@id` stable (ancrage entre schémas). Par défaut
- *                            l'URL du site + #locksmith.
  */
 export function localBusinessSchema(options?: {
   areaServed?: JsonLdObject[];
-  url?: string;
 }): JsonLdObject {
   const geoAvailable =
     SITE.geo.latitude !== null && SITE.geo.longitude !== null;
@@ -70,7 +73,7 @@ export function localBusinessSchema(options?: {
     "@type": ["LocalBusiness", "Locksmith"],
     "@id": absoluteUrl("/#locksmith"),
     name: SITE.name,
-    url: options?.url ? absoluteUrl(options.url) : SITE.url,
+    url: SITE.url,
     telephone: SITE.phoneE164,
     email: SITE.email,
     address: postalAddress(),
