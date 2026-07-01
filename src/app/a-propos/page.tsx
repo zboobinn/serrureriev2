@@ -52,7 +52,7 @@ export default function AProposPage() {
         <p className="mt-3 text-foreground/80">
           Nous intervenons sur les 9 arrondissements de Lyon et 13 communes
           du Grand Lyon.{" "}
-          <Link href="/zones" className="text-accent underline-offset-2 hover:underline">
+          <Link href="/zones" className="focus-ring rounded-sm font-semibold text-accent-strong underline-offset-2 hover:underline">
             Voir toutes nos zones d&apos;intervention →
           </Link>
         </p>
@@ -62,11 +62,11 @@ export default function AProposPage() {
           certifications professionnelles, adhésion à une fédération de
           métiers (CMA, FFB...), le cas échéant. */}
 
-      <section className="mt-10 rounded-lg bg-surface p-6">
+      <section className="mt-10 rounded-card border border-border bg-surface p-6">
         <h2 className="text-xl font-bold">Une urgence ?</h2>
         <a
           href={telHref}
-          className="mt-4 inline-block rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground"
+          className="focus-ring mt-4 inline-block rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
         >
           Appeler le {SITE.phone}
         </a>

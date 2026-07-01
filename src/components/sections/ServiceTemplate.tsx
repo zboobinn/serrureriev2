@@ -35,11 +35,11 @@ export function ServiceTemplate({ service }: { service: Service }) {
 
       <header className="mt-4">
         {service.urgence && (
-          <p className="text-sm font-semibold uppercase tracking-wide text-accent">
+          <p className="inline-flex items-center gap-2 rounded-pill border border-border bg-surface px-3 py-1 text-sm font-semibold uppercase tracking-wide text-accent-strong">
             {SITE.openingHours.label}
           </p>
         )}
-        <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+        <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
           {service.titre}
         </h1>
       </header>
@@ -51,7 +51,7 @@ export function ServiceTemplate({ service }: { service: Service }) {
         <ul className="mt-3 space-y-2">
           {service.prestations.map((prestation) => (
             <li key={prestation} className="flex gap-2 text-foreground/80">
-              <span aria-hidden="true" className="text-accent">•</span>
+              <span aria-hidden="true" className="text-accent-strong">•</span>
               {prestation}
             </li>
           ))}
@@ -63,16 +63,16 @@ export function ServiceTemplate({ service }: { service: Service }) {
         <p className="mt-3 text-foreground/80">{service.pourQui}</p>
       </section>
 
-      <section className="mt-10 flex flex-wrap gap-4 rounded-lg bg-surface p-6">
+      <section className="mt-10 flex flex-wrap gap-4 rounded-card border border-border bg-surface p-6">
         <a
           href={telHref}
-          className="rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground"
+          className="focus-ring rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
         >
           Appeler le {SITE.phone}
         </a>
         <Link
           href="/contact"
-          className="rounded-full border border-border px-6 py-3 font-semibold hover:bg-white"
+          className="focus-ring rounded-pill border border-border bg-background px-6 py-3 font-semibold transition-colors hover:border-accent-strong hover:bg-surface"
         >
           Demander un devis gratuit
         </Link>
@@ -86,7 +86,7 @@ export function ServiceTemplate({ service }: { service: Service }) {
               <li key={z.slug}>
                 <Link
                   href={zoneHref(z)}
-                  className="text-accent underline-offset-2 hover:underline"
+                  className="focus-ring rounded-sm font-semibold text-accent-strong underline-offset-2 hover:underline"
                 >
                   {service.nom} à {z.nom}
                 </Link>
@@ -95,7 +95,7 @@ export function ServiceTemplate({ service }: { service: Service }) {
             <li>
               <Link
                 href="/zones"
-                className="text-accent underline-offset-2 hover:underline"
+                className="focus-ring rounded-sm font-semibold text-accent-strong underline-offset-2 hover:underline"
               >
                 Voir toutes nos zones d&apos;intervention →
               </Link>

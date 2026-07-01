@@ -39,7 +39,7 @@ export default function BlogPage() {
 
       <a
         href={telHref}
-        className="mt-6 inline-block rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground"
+        className="focus-ring mt-6 inline-block rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
       >
         Appeler le {SITE.phone}
       </a>

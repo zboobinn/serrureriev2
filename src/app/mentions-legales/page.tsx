@@ -47,13 +47,13 @@ export default function MentionsLegalesPage() {
         <p>Adresse du siège : {addressInline}</p>
         <p>
           Téléphone :{" "}
-          <a href={telHref} className="hover:text-accent">
+          <a href={telHref} className="focus-ring rounded-sm transition-colors hover:text-accent-strong">
             {SITE.phone}
           </a>
         </p>
         <p>
           Email :{" "}
-          <a href={mailHref} className="hover:text-accent">
+          <a href={mailHref} className="focus-ring rounded-sm transition-colors hover:text-accent-strong">
             {SITE.email}
           </a>
         </p>
@@ -125,7 +125,7 @@ export default function MentionsLegalesPage() {
         <p>
           Le traitement des données personnelles collectées sur ce site est
           détaillé dans notre{" "}
-          <a href="/politique-de-confidentialite" className="hover:text-accent">
+          <a href="/politique-de-confidentialite" className="focus-ring rounded-sm transition-colors hover:text-accent-strong">
             politique de confidentialité
           </a>
           .

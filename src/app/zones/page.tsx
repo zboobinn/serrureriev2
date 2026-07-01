@@ -40,7 +40,7 @@ export default function ZonesPage() {
             <li key={z.slug}>
               <Link
                 href={zoneHref(z)}
-                className="block rounded-lg border border-border bg-surface px-4 py-3 hover:border-accent"
+                className="focus-ring block rounded-card border border-border bg-surface px-4 py-3 shadow-card transition-colors hover:border-accent-strong"
               >
                 {z.nom}
               </Link>
@@ -56,11 +56,11 @@ export default function ZonesPage() {
             <li key={z.slug}>
               <Link
                 href={zoneHref(z)}
-                className="block rounded-lg border border-border bg-surface px-4 py-3 hover:border-accent"
+                className="focus-ring block rounded-card border border-border bg-surface px-4 py-3 shadow-card transition-colors hover:border-accent-strong"
               >
                 {z.nom}
                 {z.siege && (
-                  <span className="ml-2 text-xs font-semibold text-accent">
+                  <span className="ml-2 text-xs font-semibold text-accent-strong">
                     Siège
                   </span>
                 )}

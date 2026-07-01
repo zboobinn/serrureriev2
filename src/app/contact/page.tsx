@@ -37,10 +37,10 @@ export default function ContactPage() {
 
       <div className="mt-10 grid gap-10 lg:grid-cols-2">
         <div>
-          <div className="rounded-lg bg-surface p-6">
+          <div className="rounded-card border border-border bg-surface p-6 shadow-card">
             <a
               href={telHref}
-              className="block rounded-full bg-accent px-6 py-3 text-center font-bold text-accent-foreground"
+              className="focus-ring block rounded-pill bg-accent px-6 py-3 text-center font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
             >
               Appeler le {SITE.phone}
             </a>
@@ -48,7 +48,7 @@ export default function ContactPage() {
               <p>{SITE.name}</p>
               <p>{addressInline}</p>
               <p>
-                <a href={mailHref} className="hover:text-accent">
+                <a href={mailHref} className="focus-ring rounded-sm transition-colors hover:text-accent-strong">
                   {SITE.email}
                 </a>
               </p>
@@ -69,13 +69,13 @@ export default function ContactPage() {
             href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 block rounded-lg border border-border bg-surface p-6 hover:border-accent"
+            className="focus-ring mt-6 block rounded-card border border-border bg-surface p-6 shadow-card transition-colors hover:border-accent-strong"
           >
             <p className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
               Nous trouver
             </p>
             <p className="mt-2 text-foreground/80">{addressInline}</p>
-            <span className="mt-4 inline-block text-sm font-semibold text-accent">
+            <span className="mt-4 inline-block text-sm font-semibold text-accent-strong">
               Voir sur Google Maps →
             </span>
           </a>

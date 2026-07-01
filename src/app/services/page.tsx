@@ -38,7 +38,7 @@ export default function ServicesPage() {
           <li key={service.slug}>
             <Link
               href={serviceHref(service)}
-              className="block h-full rounded-lg border border-border bg-surface p-6 transition-colors hover:border-accent"
+              className="focus-ring block h-full rounded-card border border-border bg-surface p-6 shadow-card transition-[border-color,box-shadow] hover:border-accent-strong hover:shadow-lg"
             >
               <h2 className="text-lg font-bold">{service.nom}</h2>
               <p className="mt-2 text-sm text-foreground/70">
