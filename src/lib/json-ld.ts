@@ -91,3 +91,50 @@ export function localBusinessSchema(options?: {
     description: `Serrurier à Lyon et dans le Grand Lyon depuis ${SITE.foundingYear}. Dépannage d'urgence 24h/24 7j/7, portes blindées, serrures haute sécurité. ${addressInline}.`,
   };
 }
+
+/**
+ * Schéma `Service` — utilisé sur chaque page service.
+ */
+export function serviceSchema(service: {
+  slug: string;
+  nom: string;
+  description: string;
+}): JsonLdObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: service.nom,
+    name: service.nom,
+    description: service.description,
+    url: absoluteUrl(`/services/${service.slug}`),
+    provider: {
+      "@type": ["LocalBusiness", "Locksmith"],
+      "@id": absoluteUrl("/#locksmith"),
+      name: SITE.name,
+    },
+    areaServed: {
+      "@type": "AdministrativeArea",
+      name: SITE.areaServedLabel,
+    },
+  };
+}
+
+/**
+ * Schéma `BreadcrumbList` — fil d'Ariane structuré pour les pages internes.
+ * `items` est ordonné de la racine vers la page courante ; les URL sont des
+ * chemins relatifs, résolus en URL absolue via `absoluteUrl`.
+ */
+export function breadcrumbSchema(
+  items: { name: string; url: string }[],
+): JsonLdObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.url),
+    })),
+  };
+}
