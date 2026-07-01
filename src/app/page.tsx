@@ -20,6 +20,7 @@ import { HeroBackground } from "@/components/sections/HeroBackground";
 import { ZoneMap } from "@/components/sections/ZoneMap";
 import { ParallaxHero } from "@/components/motion/ParallaxHero";
 import { Reveal } from "@/components/motion/Reveal";
+import { ContactForm } from "@/components/sections/ContactForm";
 
 /*
  * Accueil — 100 % Server Component, aucun contenu critique en client-side
@@ -270,6 +271,23 @@ export default function Home() {
             </li>
           ))}
         </ul>
+      </section>
+
+      {/* Formulaire de devis — même composant que /contact (Client Component
+          isolé à l'interactivité du formulaire, reste du contenu inchangé). */}
+      <section className="mx-auto max-w-3xl px-4 py-16">
+        <Reveal>
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            Demander un devis gratuit
+          </h2>
+          <p className="mt-4 text-foreground/70">
+            Décrivez votre besoin, nous vous recontactons rapidement — pour
+            une urgence, appelez-nous directement.
+          </p>
+          <div className="mt-8 rounded-card border border-border bg-surface p-6 shadow-card sm:p-8">
+            <ContactForm />
+          </div>
+        </Reveal>
       </section>
 
       {/* FAQ — identique au JSON-LD FAQPage ci-dessus */}

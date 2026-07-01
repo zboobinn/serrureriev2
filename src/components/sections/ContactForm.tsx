@@ -74,7 +74,7 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
       {/* Honeypot anti-spam : invisible et inaccessible au clavier pour un humain. */}
-      <div aria-hidden="true" className="absolute -left-[9999px]" style={{ opacity: 0 }}>
+      <div aria-hidden="true" className="absolute left-[-9999px]" style={{ opacity: 0 }}>
         <label htmlFor="website">Ne pas remplir</label>
         <input
           type="text"

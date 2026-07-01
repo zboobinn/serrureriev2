@@ -10,7 +10,7 @@ export function HeroBackground() {
 
       {/* Halo doré — contenu par overflow-hidden ci-dessus, ne doit jamais
           élargir la largeur de la page (cf. incident scrollbar horizontale). */}
-      <div className="absolute top-1/2 right-0 size-[560px] -translate-y-1/2 translate-x-1/3 rounded-full bg-accent/10 blur-3xl" />
+      <div className="absolute top-1/2 right-0 size-140 -translate-y-1/2 translate-x-1/3 rounded-full bg-accent/10 blur-3xl" />
 
       {/* Texture "métal brossé" — bandes très fines, opacité minimale */}
       <div
