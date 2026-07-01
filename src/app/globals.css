@@ -97,6 +97,18 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
+/* iOS Safari zoome automatiquement la page au focus d'un champ de formulaire
+   dont la taille de police calculée est < 16px (comportement natif, non
+   désactivable via viewport) — et ne revient pas toujours à l'échelle
+   initiale ensuite. Forcer 16px sur les contrôles de formulaire l'empêche
+   à la source (nos inputs n'avaient pas de taille explicite, donc taille
+   par défaut du navigateur, sous les 16px requis). */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
 @layer components {
   /* Anneau de focus clavier — un seul style : tout le site est sombre. */
   .focus-ring,
