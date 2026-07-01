@@ -77,7 +77,12 @@ body {
   /* Filet de sécurité : les effets décoratifs en bord d'écran (halo du
      hero, silhouette SVG, glow…) ne doivent jamais provoquer de défilement
      horizontal de la page. `clip` (et non `hidden`) pour ne pas transformer
-     <body> en conteneur de scroll et casser le `position: sticky` du header. */
+     <body> en conteneur de scroll et casser le `position: sticky` du header.
+     `hidden` déclaré avant `clip` : navigateurs mobiles trop anciens pour
+     comprendre `overflow: clip` (Safari < 16.4) ignorent cette dernière
+     déclaration et gardent `hidden` — sans ce filet, le défilement
+     horizontal fantôme reste possible sur ces navigateurs. */
+  overflow-x: hidden;
   overflow-x: clip;
 }
 

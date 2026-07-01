@@ -73,8 +73,16 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-      {/* Honeypot anti-spam : invisible et inaccessible au clavier pour un humain. */}
-      <div aria-hidden="true" className="absolute left-[-9999px]" style={{ opacity: 0 }}>
+      {/* Honeypot anti-spam : invisible et inaccessible au clavier pour un
+          humain. Masqué en place (taille nulle + overflow-hidden), pas de
+          décalage hors viewport — un `left: -9999px` peut être ciblé par un
+          scrollIntoView (autofill mobile) et provoquer un défilement
+          horizontal fantôme de toute la page. */}
+      <div
+        aria-hidden="true"
+        className="absolute size-0 overflow-hidden"
+        style={{ opacity: 0 }}
+      >
         <label htmlFor="website">Ne pas remplir</label>
         <input
           type="text"
