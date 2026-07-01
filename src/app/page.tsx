@@ -37,33 +37,35 @@ export default function Home() {
         schema={[localBusinessSchema(), faqSchema(breadcrumbFaqItems)]}
       />
 
-      {/* Hero */}
-      <section className="mx-auto max-w-6xl px-4 pt-12 pb-16 sm:pt-20">
-        <p className="text-sm font-semibold uppercase tracking-wide text-accent">
-          {SITE.openingHours.label} · Depuis {SITE.foundingYear}
-        </p>
-        <h1 className="mt-3 max-w-2xl text-4xl font-bold tracking-tight sm:text-5xl">
-          Serrurier à Lyon et dans le Grand Lyon
-        </h1>
-        <p className="mt-4 max-w-xl text-lg text-foreground/70">
-          Dépannage d&apos;urgence, ouverture de porte, portes blindées et
-          serrures haute sécurité. Intervention rapide sur les 9
-          arrondissements de Lyon et le Grand Lyon, 24h/24 et 7j/7.
-        </p>
+      {/* Hero — pas d'image (LCP = le texte, aucun poids visuel supplémentaire) */}
+      <section className="relative overflow-hidden bg-linear-to-b from-surface to-background px-4 pt-12 pb-16 sm:pt-20">
+        <div className="mx-auto max-w-6xl">
+          <p className="inline-flex items-center gap-2 rounded-pill border border-border bg-background px-3 py-1 text-sm font-semibold uppercase tracking-wide text-accent-strong">
+            {SITE.openingHours.label} · Depuis {SITE.foundingYear}
+          </p>
+          <h1 className="mt-4 max-w-2xl text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
+            Serrurier à Lyon et dans le Grand Lyon
+          </h1>
+          <p className="mt-4 max-w-xl text-lg text-foreground/70">
+            Dépannage d&apos;urgence, ouverture de porte, portes blindées et
+            serrures haute sécurité. Intervention rapide sur les 9
+            arrondissements de Lyon et le Grand Lyon, 24h/24 et 7j/7.
+          </p>
 
-        <div className="mt-8 flex flex-wrap gap-4">
-          <a
-            href={telHref}
-            className="rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground"
-          >
-            Appeler le {SITE.phone}
-          </a>
-          <Link
-            href="/contact"
-            className="rounded-full border border-border px-6 py-3 font-semibold hover:bg-surface"
-          >
-            Demander un devis gratuit
-          </Link>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <a
+              href={telHref}
+              className="focus-ring rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
+            >
+              Appeler le {SITE.phone}
+            </a>
+            <Link
+              href="/contact"
+              className="focus-ring rounded-pill border border-border bg-background px-6 py-3 font-semibold transition-colors hover:border-accent-strong hover:bg-surface"
+            >
+              Demander un devis gratuit
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -77,7 +79,7 @@ export default function Home() {
             <li key={service.slug}>
               <Link
                 href={serviceHref(service)}
-                className="block h-full rounded-lg border border-border bg-surface p-6 transition-colors hover:border-accent"
+                className="focus-ring block h-full rounded-card border border-border bg-surface p-6 shadow-card transition-[border-color,box-shadow] hover:border-accent-strong hover:shadow-lg"
               >
                 <h3 className="text-lg font-bold">{service.nom}</h3>
                 <p className="mt-2 text-sm text-foreground/70">
@@ -103,7 +105,7 @@ export default function Home() {
             <li>
               <Link
                 href={zoneHref(siege)}
-                className="rounded-full border border-accent bg-surface px-4 py-2 text-sm font-semibold text-accent"
+                className="focus-ring rounded-pill border border-accent-strong bg-surface px-4 py-2 text-sm font-semibold text-accent-strong transition-colors hover:bg-background"
               >
                 {siege.nom} (siège)
               </Link>
@@ -113,7 +115,7 @@ export default function Home() {
             <li key={z.slug}>
               <Link
                 href={zoneHref(z)}
-                className="rounded-full border border-border bg-surface px-4 py-2 text-sm hover:border-accent"
+                className="focus-ring rounded-pill border border-border bg-surface px-4 py-2 text-sm transition-colors hover:border-accent-strong"
               >
                 {z.nom}
               </Link>
@@ -122,7 +124,7 @@ export default function Home() {
         </ul>
         <Link
           href="/zones"
-          className="mt-6 inline-block text-accent underline-offset-2 hover:underline"
+          className="focus-ring mt-6 inline-block rounded-sm font-semibold text-accent-strong underline-offset-2 hover:underline"
         >
           Voir toutes nos zones (Lyon + Grand Lyon) →
         </Link>
@@ -134,28 +136,28 @@ export default function Home() {
           Pourquoi choisir {SITE.name} ?
         </h2>
         <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <li className="rounded-lg bg-surface p-6">
-            <p className="text-2xl font-bold text-accent">{SITE.foundingYear}</p>
+          <li className="rounded-card border border-border bg-surface p-6">
+            <p className="text-2xl font-bold text-accent-strong">{SITE.foundingYear}</p>
             <p className="mt-2 text-sm text-foreground/70">
               Artisan serrurier en activité depuis {SITE.foundingYear}
             </p>
           </li>
-          <li className="rounded-lg bg-surface p-6">
-            <p className="text-2xl font-bold text-accent">24/7</p>
+          <li className="rounded-card border border-border bg-surface p-6">
+            <p className="text-2xl font-bold text-accent-strong">24/7</p>
             <p className="mt-2 text-sm text-foreground/70">
               Disponible {SITE.openingHours.label}, y compris jours fériés
             </p>
           </li>
-          <li className="rounded-lg bg-surface p-6">
-            <p className="text-2xl font-bold text-accent">
+          <li className="rounded-card border border-border bg-surface p-6">
+            <p className="text-2xl font-bold text-accent-strong">
               {averageRating}/5
             </p>
             <p className="mt-2 text-sm text-foreground/70">
               Note moyenne sur {reviewCount} avis clients
             </p>
           </li>
-          <li className="rounded-lg bg-surface p-6">
-            <p className="text-2xl font-bold text-accent">Devis</p>
+          <li className="rounded-card border border-border bg-surface p-6">
+            <p className="text-2xl font-bold text-accent-strong">Devis</p>
             <p className="mt-2 text-sm text-foreground/70">
               Gratuit avant toute intervention non urgente
             </p>
@@ -168,18 +170,37 @@ export default function Home() {
         </ul>
       </section>
 
-      {/* Avis clients — les 10 avis réels, identiques au JSON-LD ci-dessus */}
+      {/*
+        Avis clients — les 10 avis réels, identiques au JSON-LD ci-dessus.
+        Le bloc "note globale" ci-dessous est un rendu purement visuel dérivé
+        de data/reviews.ts (averageRating/reviewCount) : aucun balisage
+        AggregateRating/Review n'est ajouté (voir lib/json-ld.ts, désactivé
+        intentionnellement).
+      */}
       <section className="mx-auto max-w-6xl px-4 py-16">
         <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
           Ils nous font confiance
         </h2>
-        <p className="mt-2 text-foreground/70">
-          {averageRating}/5 sur {reviewCount} avis clients.
-        </p>
+
+        <div className="mt-6 flex flex-wrap items-center gap-6 rounded-card border border-border bg-surface p-6">
+          <p className="text-5xl font-bold tracking-tight text-accent-strong">
+            {averageRating}/5
+          </p>
+          <div>
+            <div aria-hidden="true" className="text-lg text-accent-strong">
+              {"★".repeat(averageRating)}
+              {"☆".repeat(5 - averageRating)}
+            </div>
+            <p className="mt-1 text-sm text-foreground/70">
+              Note moyenne sur {reviewCount} avis clients vérifiés
+            </p>
+          </div>
+        </div>
+
         <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {reviews.map((review) => (
-            <li key={review.id} className="rounded-lg border border-border p-6">
-              <div aria-hidden="true" className="text-accent">
+            <li key={review.id} className="rounded-card border border-border p-6 shadow-card">
+              <div aria-hidden="true" className="text-accent-strong">
                 {"★".repeat(review.rating)}
                 {"☆".repeat(5 - review.rating)}
               </div>
@@ -200,9 +221,9 @@ export default function Home() {
           {faq.map((item) => (
             <details
               key={item.question}
-              className="rounded-lg border border-border p-4"
+              className="rounded-card border border-border p-4"
             >
-              <summary className="cursor-pointer font-semibold">
+              <summary className="focus-ring cursor-pointer rounded-sm font-semibold">
                 {item.question}
               </summary>
               <p className="mt-3 text-foreground/70">{item.reponse}</p>
@@ -213,7 +234,7 @@ export default function Home() {
 
       {/* CTA final */}
       <section className="mx-auto max-w-6xl px-4 py-16">
-        <div className="flex flex-wrap items-center justify-between gap-6 rounded-lg bg-brand px-8 py-10 text-white">
+        <div className="flex flex-wrap items-center justify-between gap-6 rounded-card bg-linear-to-br from-brand to-brand-2 px-8 py-10 text-white">
           <div>
             <h2 className="text-2xl font-bold">Une urgence serrurerie ?</h2>
             <p className="mt-2 text-white/70">
@@ -222,7 +243,7 @@ export default function Home() {
           </div>
           <a
             href={telHref}
-            className="rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground"
+            className="focus-ring-invert rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
           >
             Appeler le {SITE.phone}
           </a>

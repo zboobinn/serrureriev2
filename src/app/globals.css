@@ -2,36 +2,86 @@
 
 /*
  * Palette Serrurerie Roland — professionnel, rassurant, orienté urgence.
- *   brand   : bleu ardoise très sombre (métal), fond header/footer
- *   accent  : ambre chaud, réservé aux CTA (appel, devis)
- *   surface : fonds clairs de contenu
+ *   brand        : bleu ardoise très sombre (métal), fond header/footer
+ *   brand-2      : bleu ardoise intermédiaire, pour la profondeur (dégradés,
+ *                  cartes sombres) sans casser le contraste du texte blanc
+ *   accent       : ambre chaud — réservé aux FONDS (boutons) et au texte sur
+ *                  fond sombre. Contraste insuffisant en texte sur fond clair
+ *                  (~2:1) : ne jamais l'utiliser en texte sur blanc/surface.
+ *   accent-strong: ambre foncé — texte accent sur fond clair (AA, ratio ≥ 4.5:1)
+ *   surface      : fond clair de contenu (niveau 1)
+ *   surface-2    : fond clair de contenu (niveau 2, alternance de sections)
+ *   border       : bordure neutre à teinte acier
  */
 :root {
   --background: #ffffff;
   --foreground: #0f172a; /* slate-900 */
 
   --brand: #0f1e2e; /* bleu nuit métal */
+  --brand-2: #1e2f42; /* bleu nuit métal, un ton au-dessus (profondeur) */
   --brand-foreground: #f8fafc;
-  --accent: #f59e0b; /* ambre */
+
+  --accent: #f59e0b; /* ambre — fonds boutons / texte sur fond sombre uniquement */
   --accent-foreground: #0f1e2e;
+  --accent-strong: #b45309; /* ambre foncé — texte accent sur fond clair (AA) */
 
   --surface: #f1f5f9; /* slate-100 */
-  --border: #e2e8f0; /* slate-200 */
+  --surface-2: #e8edf3; /* légèrement plus soutenu, pour l'alternance */
+  --border: #dbe3ec; /* acier clair */
+
+  --radius-card: 0.875rem;
+  --radius-pill: 9999px;
+
+  --shadow-card: 0 1px 2px rgba(15, 30, 46, 0.06), 0 8px 24px -12px rgba(15, 30, 46, 0.18);
+  --shadow-cta: 0 8px 20px -8px rgba(245, 158, 11, 0.45);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-brand: var(--brand);
+  --color-brand-2: var(--brand-2);
   --color-brand-foreground: var(--brand-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-strong: var(--accent-strong);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-border: var(--border);
+
+  --radius-card: var(--radius-card);
+  --radius-pill: var(--radius-pill);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-cta: var(--shadow-cta);
 
   --font-sans: var(--font-geist-sans);
 }
 
 body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+  /* Anneau de focus clavier pour les éléments interactifs sur fond clair. */
+  .focus-ring {
+    outline: none;
+  }
+  .focus-ring:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--background),
+      0 0 0 4px var(--accent-strong);
+  }
+
+  /* Idem, pour les éléments interactifs sur fond sombre (brand). */
+  .focus-ring-invert {
+    outline: none;
+  }
+  .focus-ring-invert:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--brand),
+      0 0 0 4px var(--accent);
+  }
 }
