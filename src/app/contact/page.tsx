@@ -56,17 +56,29 @@ export default function ContactPage() {
             </address>
           </div>
 
-          <div className="mt-6 overflow-hidden rounded-lg border border-border">
-            <iframe
-              title={`Localisation ${SITE.name}`}
-              src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
-              width="100%"
-              height="300"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="border-0"
-            />
-          </div>
+          {/*
+            Pas d'iframe Google Maps : la version "sans clé API"
+            (google.com/maps?...&output=embed) est une URL non officielle,
+            susceptible de casser sans préavis, et alourdit inutilement le
+            LCP pour un site dont l'argument n°1 est la vitesse. Un simple
+            lien sortant est plus léger et plus fiable. Si une carte visuelle
+            est souhaitée plus tard, l'API Maps Embed officielle nécessite
+            une clé Google (GOOGLE_MAPS_EMBED_API_KEY, non configurée).
+          */}
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 block rounded-lg border border-border bg-surface p-6 hover:border-accent"
+          >
+            <p className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
+              Nous trouver
+            </p>
+            <p className="mt-2 text-foreground/80">{addressInline}</p>
+            <span className="mt-4 inline-block text-sm font-semibold text-accent">
+              Voir sur Google Maps →
+            </span>
+          </a>
         </div>
 
         <div>

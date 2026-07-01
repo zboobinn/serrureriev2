@@ -9,6 +9,7 @@
 
 import { SITE, addressInline, socialLinks } from "@/data/site";
 import { zones } from "@/data/zones";
+import { reviews, averageRating, reviewCount } from "@/data/reviews";
 
 /** Objet JSON-LD générique. */
 export type JsonLdObject = Record<string, unknown>;
@@ -59,11 +60,16 @@ const defaultAreaServed = (): JsonLdObject[] =>
  * faire varier `url` avec la page courante — ce serait un signal contradictoire
  * pour Google sur l'URL canonique de l'entité.
  *
- * @param options.areaServed  Restreint la zone desservie (pages zone). Par
- *                            défaut : toutes les zones connues.
+ * @param options.areaServed     Restreint la zone desservie (pages zone). Par
+ *                               défaut : toutes les zones connues.
+ * @param options.includeReviews N'ajoute `aggregateRating`/`review` que sur
+ *                               la page où les avis sont réellement affichés
+ *                               (l'accueil) — jamais sur une page où ils ne
+ *                               sont pas visibles à l'écran.
  */
 export function localBusinessSchema(options?: {
   areaServed?: JsonLdObject[];
+  includeReviews?: boolean;
 }): JsonLdObject {
   const geoAvailable =
     SITE.geo.latitude !== null && SITE.geo.longitude !== null;
@@ -92,6 +98,27 @@ export function localBusinessSchema(options?: {
     foundingDate: String(SITE.foundingYear),
     ...(socialLinks.length > 0 ? { sameAs: socialLinks } : {}),
     description: `Serrurier à Lyon et dans le Grand Lyon depuis ${SITE.foundingYear}. Dépannage d'urgence 24h/24 7j/7, portes blindées, serrures haute sécurité. ${addressInline}.`,
+    ...(options?.includeReviews
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: averageRating,
+            reviewCount,
+            bestRating: 5,
+          },
+          review: reviews.map((r) => ({
+            "@type": "Review",
+            author: { "@type": "Person", name: r.author },
+            datePublished: r.date,
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: r.rating,
+              bestRating: 5,
+            },
+            reviewBody: r.text,
+          })),
+        }
+      : {}),
   };
 }
 
@@ -119,6 +146,31 @@ export function serviceSchema(service: {
       "@type": "AdministrativeArea",
       name: SITE.areaServedLabel,
     },
+  };
+}
+
+/**
+ * Schéma `FAQPage`.
+ *
+ * ⚠️ `items` doit correspondre EXACTEMENT aux questions/réponses réellement
+ * affichées à l'écran (ne jamais baliser une FAQ non visible : c'est le
+ * genre d'écart entre schema et contenu visible qui peut déclencher une
+ * pénalité manuelle Google sur les rich results).
+ */
+export function faqSchema(
+  items: { question: string; reponse: string }[],
+): JsonLdObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.reponse,
+      },
+    })),
   };
 }
 
