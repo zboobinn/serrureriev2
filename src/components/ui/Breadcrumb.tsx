@@ -21,7 +21,10 @@ export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
                   {item.name}
                 </span>
               ) : (
-                <Link href={item.url} className="hover:text-accent">
+                <Link
+                  href={item.url}
+                  className="focus-ring rounded-sm transition-colors hover:text-accent-strong"
+                >
                   {item.name}
                 </Link>
               )}

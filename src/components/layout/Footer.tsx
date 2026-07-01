@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Mail, MapPin, Phone } from "lucide-react";
 import {
   SITE,
   telHref,
@@ -15,20 +16,25 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-white/10 bg-brand text-white/80">
+    <footer className="mt-auto border-t border-white/10 bg-linear-to-b from-brand to-brand-2 text-white/80">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
         {/* NAP */}
         <div>
           <h2 className="text-base font-bold text-white">{SITE.name}</h2>
-          <address className="mt-3 space-y-1 text-sm not-italic">
-            <p>{addressInline}</p>
-            <p>
-              <a href={telHref} className="hover:text-accent">
+          <address className="mt-3 space-y-2 text-sm not-italic">
+            <p className="flex items-start gap-2">
+              <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-white/60" />
+              {addressInline}
+            </p>
+            <p className="flex items-center gap-2">
+              <Phone aria-hidden="true" className="size-4 shrink-0 text-white/60" />
+              <a href={telHref} className="focus-ring-invert rounded-sm transition-colors hover:text-accent">
                 {SITE.phone}
               </a>
             </p>
-            <p>
-              <a href={mailHref} className="hover:text-accent">
+            <p className="flex items-center gap-2">
+              <Mail aria-hidden="true" className="size-4 shrink-0 text-white/60" />
+              <a href={mailHref} className="focus-ring-invert rounded-sm transition-colors hover:text-accent">
                 {SITE.email}
               </a>
             </p>
@@ -42,10 +48,10 @@ export function Footer() {
             Services
           </h2>
           <ul className="mt-3 space-y-2 text-sm">
-            <li><Link href="/services/depannage-urgent" className="hover:text-accent">Dépannage urgent</Link></li>
-            <li><Link href="/services/portes-blindees" className="hover:text-accent">Portes blindées</Link></li>
-            <li><Link href="/services/serrures-haute-securite" className="hover:text-accent">Serrures haute sécurité</Link></li>
-            <li><Link href="/services" className="hover:text-accent">Tous les services</Link></li>
+            <li><Link href="/services/depannage-urgent" className="focus-ring-invert rounded-sm transition-colors hover:text-accent">Dépannage urgent</Link></li>
+            <li><Link href="/services/portes-blindees" className="focus-ring-invert rounded-sm transition-colors hover:text-accent">Portes blindées</Link></li>
+            <li><Link href="/services/serrures-haute-securite" className="focus-ring-invert rounded-sm transition-colors hover:text-accent">Serrures haute sécurité</Link></li>
+            <li><Link href="/services" className="focus-ring-invert rounded-sm transition-colors hover:text-accent">Tous les services</Link></li>
           </ul>
         </nav>
 
@@ -57,7 +63,7 @@ export function Footer() {
           <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
             {arrondissements.map((z) => (
               <li key={z.slug}>
-                <Link href={zoneHref(z)} className="hover:text-accent">
+                <Link href={zoneHref(z)} className="focus-ring-invert rounded-sm transition-colors hover:text-accent">
                   {z.nom}
                 </Link>
               </li>
@@ -73,7 +79,7 @@ export function Footer() {
           <ul className="mt-3 space-y-2 text-sm">
             {communes.map((z) => (
               <li key={z.slug}>
-                <Link href={zoneHref(z)} className="hover:text-accent">
+                <Link href={zoneHref(z)} className="focus-ring-invert rounded-sm transition-colors hover:text-accent">
                   {z.nom}
                 </Link>
               </li>
@@ -88,12 +94,12 @@ export function Footer() {
             © {year} {SITE.name} — Serrurier depuis {SITE.foundingYear}.
           </p>
           <nav aria-label="Liens légaux" className="flex gap-4">
-            <Link href="/mentions-legales" className="hover:text-accent">
+            <Link href="/mentions-legales" className="focus-ring-invert rounded-sm transition-colors hover:text-accent">
               Mentions légales
             </Link>
             <Link
               href="/politique-de-confidentialite"
-              className="hover:text-accent"
+              className="focus-ring-invert rounded-sm transition-colors hover:text-accent"
             >
               Confidentialité
             </Link>

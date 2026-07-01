@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Phone } from "lucide-react";
 
 import { SITE, telHref } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/json-ld";
@@ -39,8 +40,9 @@ export default function BlogPage() {
 
       <a
         href={telHref}
-        className="mt-6 inline-block rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground"
+        className="focus-ring mt-6 inline-flex items-center gap-2 rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
       >
+        <Phone aria-hidden="true" className="size-4" />
         Appeler le {SITE.phone}
       </a>
     </section>

@@ -36,7 +36,7 @@ export default function PolitiqueConfidentialitePage() {
         <h2 className="text-xl font-bold">Responsable de traitement</h2>
         <p>
           {SITE.name}, {addressInline}, joignable à{" "}
-          <a href={mailHref} className="hover:text-accent">
+          <a href={mailHref} className="focus-ring rounded-sm transition-colors hover:text-accent-strong">
             {SITE.email}
           </a>
           , est responsable du traitement des données personnelles collectées
@@ -50,7 +50,7 @@ export default function PolitiqueConfidentialitePage() {
         </h2>
         <p>
           Lorsque vous remplissez le formulaire de la page{" "}
-          <a href="/contact" className="hover:text-accent">
+          <a href="/contact" className="focus-ring rounded-sm transition-colors hover:text-accent-strong">
             Contact
           </a>
           , nous collectons : votre nom, votre numéro de téléphone, votre
@@ -104,7 +104,7 @@ export default function PolitiqueConfidentialitePage() {
           rectification, d&apos;effacement, de limitation et
           d&apos;opposition au traitement de vos données, ainsi que d&apos;un
           droit à la portabilité. Pour exercer ces droits, contactez-nous à{" "}
-          <a href={mailHref} className="hover:text-accent">
+          <a href={mailHref} className="focus-ring rounded-sm transition-colors hover:text-accent-strong">
             {SITE.email}
           </a>
           . Vous disposez également du droit d&apos;introduire une réclamation

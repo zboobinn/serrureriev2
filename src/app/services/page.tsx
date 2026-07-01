@@ -5,6 +5,7 @@ import { services, serviceHref } from "@/data/services";
 import { breadcrumbSchema } from "@/lib/json-ld";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { SERVICE_ICONS } from "@/components/sections/service-icons";
 
 export const metadata: Metadata = {
   title: "Nos services de serrurerie",
@@ -34,19 +35,27 @@ export default function ServicesPage() {
       </p>
 
       <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((service) => (
-          <li key={service.slug}>
-            <Link
-              href={serviceHref(service)}
-              className="block h-full rounded-lg border border-border bg-surface p-6 transition-colors hover:border-accent"
-            >
-              <h2 className="text-lg font-bold">{service.nom}</h2>
-              <p className="mt-2 text-sm text-foreground/70">
-                {service.description}
-              </p>
-            </Link>
-          </li>
-        ))}
+        {services.map((service) => {
+          const Icon = SERVICE_ICONS[service.slug];
+          return (
+            <li key={service.slug}>
+              <Link
+                href={serviceHref(service)}
+                className="focus-ring group block h-full rounded-card border border-border bg-surface p-6 shadow-card transition-[transform,box-shadow,border-color] hover:-translate-y-1 hover:border-accent-strong hover:shadow-card-hover"
+              >
+                {Icon && (
+                  <span className="inline-flex size-11 items-center justify-center rounded-full border border-accent-strong/30 bg-background text-accent-strong">
+                    <Icon aria-hidden="true" className="size-5" />
+                  </span>
+                )}
+                <h2 className="mt-4 text-lg font-bold">{service.nom}</h2>
+                <p className="mt-2 text-sm text-foreground/70">
+                  {service.description}
+                </p>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

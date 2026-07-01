@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Check, Clock, Phone } from "lucide-react";
 
 import type { Service } from "@/data/services";
 import { zoneHref, getZoneBySlug } from "@/data/zones";
@@ -6,6 +7,7 @@ import { SITE, telHref } from "@/data/site";
 import { serviceSchema, breadcrumbSchema } from "@/lib/json-ld";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { SERVICE_ICONS } from "@/components/sections/service-icons";
 
 /**
  * Gabarit visuel partagé par les 6 pages service (fichiers dédiés dans
@@ -27,6 +29,8 @@ export function ServiceTemplate({ service }: { service: Service }) {
     (z): z is NonNullable<typeof z> => Boolean(z),
   );
 
+  const Icon = SERVICE_ICONS[service.slug];
+
   return (
     <article className="mx-auto max-w-3xl px-4 py-12">
       <JsonLd schema={[serviceSchema(service), breadcrumbSchema(breadcrumbItems)]} />
@@ -34,12 +38,18 @@ export function ServiceTemplate({ service }: { service: Service }) {
       <Breadcrumb items={breadcrumbItems} />
 
       <header className="mt-4">
+        {Icon && (
+          <span className="inline-flex size-12 items-center justify-center rounded-full border border-accent-strong/30 bg-surface text-accent-strong">
+            <Icon aria-hidden="true" className="size-6" />
+          </span>
+        )}
         {service.urgence && (
-          <p className="text-sm font-semibold uppercase tracking-wide text-accent">
+          <p className="mt-4 inline-flex items-center gap-2 rounded-pill border border-border bg-surface px-3 py-1 text-sm font-semibold uppercase tracking-wide text-accent-strong">
+            <Clock aria-hidden="true" className="size-4" />
             {SITE.openingHours.label}
           </p>
         )}
-        <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+        <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
           {service.titre}
         </h1>
       </header>
@@ -51,7 +61,7 @@ export function ServiceTemplate({ service }: { service: Service }) {
         <ul className="mt-3 space-y-2">
           {service.prestations.map((prestation) => (
             <li key={prestation} className="flex gap-2 text-foreground/80">
-              <span aria-hidden="true" className="text-accent">•</span>
+              <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-strong" />
               {prestation}
             </li>
           ))}
@@ -63,16 +73,17 @@ export function ServiceTemplate({ service }: { service: Service }) {
         <p className="mt-3 text-foreground/80">{service.pourQui}</p>
       </section>
 
-      <section className="mt-10 flex flex-wrap gap-4 rounded-lg bg-surface p-6">
+      <section className="mt-10 flex flex-wrap gap-4 rounded-card border border-border bg-surface p-6">
         <a
           href={telHref}
-          className="rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground"
+          className="focus-ring inline-flex items-center gap-2 rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
         >
+          <Phone aria-hidden="true" className="size-4" />
           Appeler le {SITE.phone}
         </a>
         <Link
           href="/contact"
-          className="rounded-full border border-border px-6 py-3 font-semibold hover:bg-white"
+          className="focus-ring rounded-pill border border-border bg-background px-6 py-3 font-semibold transition-colors hover:border-accent-strong hover:bg-surface"
         >
           Demander un devis gratuit
         </Link>
@@ -86,7 +97,7 @@ export function ServiceTemplate({ service }: { service: Service }) {
               <li key={z.slug}>
                 <Link
                   href={zoneHref(z)}
-                  className="text-accent underline-offset-2 hover:underline"
+                  className="focus-ring rounded-sm font-semibold text-accent-strong underline-offset-2 hover:underline"
                 >
                   {service.nom} à {z.nom}
                 </Link>
@@ -95,7 +106,7 @@ export function ServiceTemplate({ service }: { service: Service }) {
             <li>
               <Link
                 href="/zones"
-                className="text-accent underline-offset-2 hover:underline"
+                className="focus-ring rounded-sm font-semibold text-accent-strong underline-offset-2 hover:underline"
               >
                 Voir toutes nos zones d&apos;intervention →
               </Link>

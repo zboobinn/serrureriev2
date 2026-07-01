@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { MapPin, Phone } from "lucide-react";
 
 import { allZoneSlugs, zoneHref, getLimitrophes } from "@/data/zones";
 import { SITE, telHref } from "@/data/site";
@@ -88,10 +89,11 @@ export default async function ZonePage({
       <Breadcrumb items={breadcrumbItems} />
 
       <header className="mt-4">
-        <p className="text-sm font-semibold uppercase tracking-wide text-accent">
+        <p className="inline-flex items-center gap-2 rounded-pill border border-border bg-surface px-3 py-1 text-sm font-semibold uppercase tracking-wide text-accent-strong">
+          <MapPin aria-hidden="true" className="size-4" />
           {zone.codePostal} · {zone.secteur}
         </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+        <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
           Serrurier à {zone.nomComplet}
         </h1>
       </header>
@@ -131,7 +133,7 @@ export default async function ZonePage({
           {zone.quartiers.map((quartier) => (
             <li
               key={quartier}
-              className="rounded-full border border-border bg-surface px-3 py-1 text-sm"
+              className="rounded-pill border border-border bg-surface px-3 py-1 text-sm"
             >
               {quartier}
             </li>
@@ -140,16 +142,17 @@ export default async function ZonePage({
       </section>
 
       {/* CTA */}
-      <section className="mt-10 flex flex-wrap gap-4 rounded-lg bg-surface p-6">
+      <section className="mt-10 flex flex-wrap gap-4 rounded-card border border-border bg-surface p-6">
         <a
           href={telHref}
-          className="rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground"
+          className="focus-ring inline-flex items-center gap-2 rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
         >
+          <Phone aria-hidden="true" className="size-4" />
           Appeler le {SITE.phone}
         </a>
         <Link
           href="/contact"
-          className="rounded-full border border-border px-6 py-3 font-semibold hover:bg-white"
+          className="focus-ring rounded-pill border border-border bg-background px-6 py-3 font-semibold transition-colors hover:border-accent-strong hover:bg-surface"
         >
           Demander un devis gratuit
         </Link>
@@ -164,7 +167,7 @@ export default async function ZonePage({
               <li key={z.slug}>
                 <Link
                   href={zoneHref(z)}
-                  className="text-accent underline-offset-2 hover:underline"
+                  className="focus-ring rounded-sm font-semibold text-accent-strong underline-offset-2 hover:underline"
                 >
                   Serrurier {z.nom}
                 </Link>
@@ -188,7 +191,7 @@ export default async function ZonePage({
         </p>
         <Link
           href="/services"
-          className="mt-3 inline-block text-accent underline-offset-2 hover:underline"
+          className="focus-ring mt-3 inline-block rounded-sm font-semibold text-accent-strong underline-offset-2 hover:underline"
         >
           Voir tous nos services →
         </Link>

@@ -64,7 +64,7 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <p role="status" className="rounded-lg bg-surface p-6 text-foreground/80">
+      <p className="rounded-card border border-border bg-surface p-6 text-foreground/80" role="status">
         Votre demande a bien été envoyée. Nous vous recontactons rapidement —
         pour une urgence, appelez-nous directement.
       </p>
@@ -74,7 +74,7 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
       {/* Honeypot anti-spam : invisible et inaccessible au clavier pour un humain. */}
-      <div aria-hidden="true" className="absolute -left-[9999px]" style={{ opacity: 0 }}>
+      <div aria-hidden="true" className="absolute left-[-9999px]" style={{ opacity: 0 }}>
         <label htmlFor="website">Ne pas remplir</label>
         <input
           type="text"
@@ -94,7 +94,7 @@ export function ContactForm() {
           name="name"
           type="text"
           required
-          className="mt-1 w-full rounded-md border border-border px-3 py-2"
+          className="focus-ring mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-foreground"
         />
       </div>
 
@@ -108,7 +108,7 @@ export function ContactForm() {
             name="phone"
             type="tel"
             required
-            className="mt-1 w-full rounded-md border border-border px-3 py-2"
+            className="focus-ring mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-foreground"
           />
         </div>
         <div>
@@ -119,7 +119,7 @@ export function ContactForm() {
             id="email"
             name="email"
             type="email"
-            className="mt-1 w-full rounded-md border border-border px-3 py-2"
+            className="focus-ring mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-foreground"
           />
         </div>
       </div>
@@ -131,7 +131,7 @@ export function ContactForm() {
         <select
           id="zone"
           name="zone"
-          className="mt-1 w-full rounded-md border border-border px-3 py-2"
+          className="focus-ring mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-foreground"
           defaultValue=""
         >
           <option value="">Non précisé</option>
@@ -161,7 +161,7 @@ export function ContactForm() {
           name="message"
           required
           rows={5}
-          className="mt-1 w-full rounded-md border border-border px-3 py-2"
+          className="focus-ring mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-foreground"
         />
       </div>
 
@@ -171,7 +171,7 @@ export function ContactForm() {
           name="consent"
           type="checkbox"
           required
-          className="mt-1"
+          className="focus-ring mt-1"
         />
         <label htmlFor="consent" className="text-sm text-foreground/80">
           J&apos;accepte que mes données soient utilisées pour traiter ma
@@ -184,7 +184,7 @@ export function ContactForm() {
       </div>
 
       {status === "error" && errorMessage && (
-        <p role="alert" className="text-sm font-medium text-red-600">
+        <p role="alert" className="text-sm font-medium text-red-400">
           {errorMessage}
         </p>
       )}
@@ -192,7 +192,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground disabled:opacity-60"
+        className="focus-ring rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90 disabled:opacity-60"
       >
         {status === "sending" ? "Envoi en cours…" : "Envoyer ma demande"}
       </button>

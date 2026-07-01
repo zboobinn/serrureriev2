@@ -1,37 +1,113 @@
 @import "tailwindcss";
 
 /*
- * Palette Serrurerie Roland — professionnel, rassurant, orienté urgence.
- *   brand   : bleu ardoise très sombre (métal), fond header/footer
- *   accent  : ambre chaud, réservé aux CTA (appel, devis)
- *   surface : fonds clairs de contenu
+ * Palette Serrurerie Roland — thème sombre "luxe artisan" (anthracite + or
+ * brossé), appliqué sur tout le site pour une cohérence de marque.
+ *   background   : anthracite profond, fond de page par défaut
+ *   brand        : noir quasi-mat, fond header/footer (une nuance plus
+ *                  sombre que background, pour la profondeur)
+ *   brand-2      : légèrement plus clair que brand — dégradés de profondeur
+ *   accent       : or brossé — fonds de CTA, icônes, glow au survol
+ *   accent-strong: or légèrement plus soutenu — texte accent (mêmes usages
+ *                  qu'avant la bascule sombre ; les deux passent large AAA
+ *                  ici, conservés pour ne pas renommer tout le code)
+ *   surface      : panneaux/cartes élevés par rapport au fond (niveau 1)
+ *   surface-2    : élévation supplémentaire (niveau 2)
+ *   border       : bordure discrète sur fond sombre
  */
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a; /* slate-900 */
+  /* Chrome natif (inputs, scrollbars, date pickers…) rendu sombre par
+     défaut — sinon les navigateurs affichent des contrôles de formulaire
+     clairs quel que soit le CSS applicatif. */
+  color-scheme: dark;
 
-  --brand: #0f1e2e; /* bleu nuit métal */
-  --brand-foreground: #f8fafc;
-  --accent: #f59e0b; /* ambre */
-  --accent-foreground: #0f1e2e;
+  --background: #121212; /* anthracite profond */
+  --foreground: #f2f0ea; /* blanc cassé chaud, pas de blanc pur */
 
-  --surface: #f1f5f9; /* slate-100 */
-  --border: #e2e8f0; /* slate-200 */
+  --brand: #0a0a0a; /* noir mat, header/footer */
+  --brand-2: #171717; /* un ton au-dessus, pour la profondeur */
+  --brand-foreground: #f2f0ea;
+
+  --accent: #d4af37; /* or brossé */
+  --accent-foreground: #121212;
+  --accent-strong: #c9a227; /* or plus soutenu, texte */
+  --accent-muted: #8a7434; /* or assourdi — bordures discrètes, icônes secondaires */
+
+  --surface: #1a1a1a;
+  --surface-2: #232323;
+  --border: #2a2a2a;
 }
 
+/*
+ * @theme inline : les valeurs radius/shadow sont littérales (pas de
+ * `var(--x)` homonyme) — un seul point de déclaration, pas d'ambiguïté de
+ * cascade layer possible.
+ */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-brand: var(--brand);
+  --color-brand-2: var(--brand-2);
   --color-brand-foreground: var(--brand-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-muted: var(--accent-muted);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-border: var(--border);
+
+  /* Radius généreux — signature "carte premium". */
+  --radius-card: 1.25rem;
+  --radius-pill: 9999px;
+
+  /* Sur fond sombre, l'ombre noire classique ne "lit" plus : la profondeur
+     vient d'un halo doré subtil au repos, renforcé au survol (glow demandé
+     dans la direction "micro-interactions"). */
+  --shadow-card: 0 1px 0 0 rgba(255, 255, 255, 0.04) inset, 0 16px 32px -16px rgba(0, 0, 0, 0.6);
+  --shadow-card-hover: 0 1px 0 0 rgba(255, 255, 255, 0.06) inset, 0 0 32px -4px rgba(212, 175, 55, 0.35), 0 20px 40px -16px rgba(0, 0, 0, 0.7);
+  --shadow-cta: 0 0 0 1px rgba(212, 175, 55, 0.4), 0 10px 28px -8px rgba(212, 175, 55, 0.55);
+  --shadow-glow: 0 0 40px rgba(212, 175, 55, 0.25);
 
   --font-sans: var(--font-geist-sans);
 }
 
+html,
+body {
+  /* Filet de sécurité : les effets décoratifs en bord d'écran (halo du
+     hero, silhouette SVG, glow…) ne doivent jamais provoquer de défilement
+     horizontal de la page. `clip` (et non `hidden`) pour ne pas transformer
+     <body> en conteneur de scroll et casser le `position: sticky` du header. */
+  overflow-x: clip;
+}
+
 body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+  /* Anneau de focus clavier — un seul style : tout le site est sombre. */
+  .focus-ring,
+  .focus-ring-invert {
+    outline: none;
+  }
+  .focus-ring:focus-visible,
+  .focus-ring-invert:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--background),
+      0 0 0 4px var(--accent);
+  }
+}
+
+/* Respect strict de prefers-reduced-motion : neutralise toute animation
+   CSS résiduelle (Framer Motion gère sa propre désactivation côté JS via
+   MotionConfig reducedMotion="user", voir motion/MotionProvider.tsx). */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

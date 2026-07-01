@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
 import { SITE, telHref, mailHref, addressInline } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/json-ld";
@@ -37,22 +38,30 @@ export default function ContactPage() {
 
       <div className="mt-10 grid gap-10 lg:grid-cols-2">
         <div>
-          <div className="rounded-lg bg-surface p-6">
+          <div className="rounded-card border border-border bg-surface p-6 shadow-card">
             <a
               href={telHref}
-              className="block rounded-full bg-accent px-6 py-3 text-center font-bold text-accent-foreground"
+              className="focus-ring flex items-center justify-center gap-2 rounded-pill bg-accent px-6 py-3 text-center font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
             >
+              <Phone aria-hidden="true" className="size-4" />
               Appeler le {SITE.phone}
             </a>
-            <address className="mt-4 space-y-1 text-sm not-italic text-foreground/80">
-              <p>{SITE.name}</p>
-              <p>{addressInline}</p>
-              <p>
-                <a href={mailHref} className="hover:text-accent">
+            <address className="mt-4 space-y-2 text-sm not-italic text-foreground/80">
+              <p className="font-semibold text-foreground">{SITE.name}</p>
+              <p className="flex items-start gap-2">
+                <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-strong" />
+                {addressInline}
+              </p>
+              <p className="flex items-center gap-2">
+                <Mail aria-hidden="true" className="size-4 shrink-0 text-accent-strong" />
+                <a href={mailHref} className="focus-ring rounded-sm transition-colors hover:text-accent-strong">
                   {SITE.email}
                 </a>
               </p>
-              <p>{SITE.openingHours.label}</p>
+              <p className="flex items-center gap-2">
+                <Clock aria-hidden="true" className="size-4 shrink-0 text-accent-strong" />
+                {SITE.openingHours.label}
+              </p>
             </address>
           </div>
 
@@ -69,13 +78,14 @@ export default function ContactPage() {
             href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 block rounded-lg border border-border bg-surface p-6 hover:border-accent"
+            className="focus-ring mt-6 block rounded-card border border-border bg-surface p-6 shadow-card transition-colors hover:border-accent-strong"
           >
-            <p className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
+            <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-foreground/60">
+              <MapPin aria-hidden="true" className="size-4" />
               Nous trouver
             </p>
             <p className="mt-2 text-foreground/80">{addressInline}</p>
-            <span className="mt-4 inline-block text-sm font-semibold text-accent">
+            <span className="mt-4 inline-block text-sm font-semibold text-accent-strong">
               Voir sur Google Maps →
             </span>
           </a>
