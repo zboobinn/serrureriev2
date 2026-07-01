@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { absoluteUrl } from "@/lib/json-ld";
-import { allZoneSlugs, ZONE_URL_PREFIX } from "@/data/zones";
+import { allZoneSlugs, ZONE_URL_PREFIX }  from "@/data/zones"; 
 import { services, serviceHref } from "@/data/services";
 
 /**
