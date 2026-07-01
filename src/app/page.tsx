@@ -5,8 +5,9 @@ import {
   Clock,
   FileCheck,
   Phone,
+  ShieldCheck,
   Star,
-} from "lucide-react"; 
+} from "lucide-react";
 
 import { SITE, telHref } from "@/data/site";
 import { services, serviceHref } from "@/data/services";
@@ -119,6 +120,46 @@ export default function Home() {
             );
           })}
         </ul>
+      </section>
+
+      {/* Bandeau de confiance : assurances partenaires + certification matériel */}
+      <section className="mx-auto max-w-6xl px-4">
+        <Reveal>
+          <div className="grid gap-8 rounded-card border border-border bg-surface p-8 sm:grid-cols-3 sm:items-center sm:divide-x sm:divide-border">
+            <div className="flex items-start gap-3">
+              <ShieldCheck aria-hidden="true" className="mt-0.5 size-9 shrink-0 text-accent" />
+              <div>
+                <p className="font-bold">Agréé assurances</p>
+                <p className="text-sm text-foreground/70">
+                  Remboursement suite à effraction
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center sm:px-6">
+              <p className="font-semibold text-foreground/80">
+                AXA · MACIF · Allianz
+                <br />
+                Groupama · MAAF · Matmut
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3 sm:justify-end sm:pl-6">
+              <div>
+                <p className="font-bold">Matériel certifié</p>
+                <p className="text-sm text-foreground/70">
+                  Norme de sécurité A2P
+                </p>
+              </div>
+              <span
+                aria-hidden="true"
+                className="inline-flex size-12 shrink-0 items-center justify-center rounded-md border border-accent-strong/40 bg-brand text-sm font-black text-accent"
+              >
+                A2P
+              </span>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* Zones desservies */}
