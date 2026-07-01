@@ -6,7 +6,7 @@ import {
   FileCheck,
   Phone,
   Star,
-} from "lucide-react";
+} from "lucide-react"; 
 
 import { SITE, telHref } from "@/data/site";
 import { services, serviceHref } from "@/data/services";
