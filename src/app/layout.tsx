@@ -7,7 +7,8 @@ import { localBusinessSchema } from "@/lib/json-ld";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { MobileCallBar } from "@/components/layout/MobileCallBar";
+import { StickyCallButton } from "@/components/layout/StickyCallButton";
+import { MotionProvider } from "@/components/motion/MotionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,10 +59,12 @@ export default function RootLayout({
         {/* JSON-LD LocalBusiness global, présent sur toutes les pages */}
         <JsonLd schema={localBusinessSchema()} />
 
-        <Header />
-        <main className="flex-1 pb-20 md:pb-0">{children}</main>
-        <Footer />
-        <MobileCallBar />
+        <MotionProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <StickyCallButton />
+        </MotionProvider>
       </body>
     </html>
   );

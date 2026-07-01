@@ -94,7 +94,7 @@ export function ContactForm() {
           name="name"
           type="text"
           required
-          className="focus-ring mt-1 w-full rounded-md border border-border px-3 py-2"
+          className="focus-ring mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-foreground"
         />
       </div>
 
@@ -108,7 +108,7 @@ export function ContactForm() {
             name="phone"
             type="tel"
             required
-            className="focus-ring mt-1 w-full rounded-md border border-border px-3 py-2"
+            className="focus-ring mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-foreground"
           />
         </div>
         <div>
@@ -119,7 +119,7 @@ export function ContactForm() {
             id="email"
             name="email"
             type="email"
-            className="focus-ring mt-1 w-full rounded-md border border-border px-3 py-2"
+            className="focus-ring mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-foreground"
           />
         </div>
       </div>
@@ -131,7 +131,7 @@ export function ContactForm() {
         <select
           id="zone"
           name="zone"
-          className="focus-ring mt-1 w-full rounded-md border border-border px-3 py-2"
+          className="focus-ring mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-foreground"
           defaultValue=""
         >
           <option value="">Non précisé</option>
@@ -161,7 +161,7 @@ export function ContactForm() {
           name="message"
           required
           rows={5}
-          className="focus-ring mt-1 w-full rounded-md border border-border px-3 py-2"
+          className="focus-ring mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-foreground"
         />
       </div>
 
@@ -184,7 +184,7 @@ export function ContactForm() {
       </div>
 
       {status === "error" && errorMessage && (
-        <p role="alert" className="text-sm font-medium text-red-600">
+        <p role="alert" className="text-sm font-medium text-red-400">
           {errorMessage}
         </p>
       )}

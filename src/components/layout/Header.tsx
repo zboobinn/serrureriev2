@@ -5,15 +5,15 @@ import { SITE, telHref } from "@/data/site";
 /**
  * En-tête global. Le téléphone reste visible en permanence (priorité
  * conversion + SEO local). Navigation principale : services / zones / à propos
- * / contact.
+ * / contact. Fond verre dépoli (backdrop-blur) sur le thème sombre.
  */
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-brand text-white shadow-[0_1px_0_0_rgba(255,255,255,0.06),0_12px_24px_-16px_rgba(0,0,0,0.6)]">
+    <header className="sticky top-0 z-40 border-b border-border bg-brand/85 text-foreground shadow-[0_1px_0_0_rgba(255,255,255,0.04)] backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
         <Link href="/" className="focus-ring-invert flex flex-col rounded-sm leading-tight">
           <span className="text-lg font-bold tracking-tight">{SITE.name}</span>
-          <span className="text-xs text-white/70">
+          <span className="text-xs text-foreground/60">
             Serrurier à Lyon &amp; Grand Lyon · {SITE.openingHours.label}
           </span>
         </Link>
@@ -38,7 +38,7 @@ export function Header() {
 
         <a
           href={telHref}
-          className="focus-ring-invert inline-flex items-center gap-2 rounded-pill bg-accent px-4 py-2 text-sm font-bold text-brand shadow-cta transition-colors hover:bg-accent/90"
+          className="focus-ring-invert inline-flex items-center gap-2 rounded-pill bg-accent px-4 py-2 text-sm font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
         >
           <Phone aria-hidden="true" className="size-4" />
           <span className="hidden sm:inline">Appeler&nbsp;</span>

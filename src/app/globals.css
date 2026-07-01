@@ -1,40 +1,47 @@
 @import "tailwindcss";
 
 /*
- * Palette Serrurerie Roland — professionnel, rassurant, orienté urgence.
- *   brand        : bleu ardoise très sombre (métal), fond header/footer
- *   brand-2      : bleu ardoise intermédiaire, pour la profondeur (dégradés,
- *                  cartes sombres) sans casser le contraste du texte blanc
- *   accent       : ambre chaud — réservé aux FONDS (boutons) et au texte sur
- *                  fond sombre. Contraste insuffisant en texte sur fond clair
- *                  (~2:1) : ne jamais l'utiliser en texte sur blanc/surface.
- *   accent-strong: ambre foncé — texte accent sur fond clair (AA, ratio ≥ 4.5:1)
- *   surface      : fond clair de contenu (niveau 1)
- *   surface-2    : fond clair de contenu (niveau 2, alternance de sections)
- *   border       : bordure neutre à teinte acier
+ * Palette Serrurerie Roland — thème sombre "luxe artisan" (anthracite + or
+ * brossé), appliqué sur tout le site pour une cohérence de marque.
+ *   background   : anthracite profond, fond de page par défaut
+ *   brand        : noir quasi-mat, fond header/footer (une nuance plus
+ *                  sombre que background, pour la profondeur)
+ *   brand-2      : légèrement plus clair que brand — dégradés de profondeur
+ *   accent       : or brossé — fonds de CTA, icônes, glow au survol
+ *   accent-strong: or légèrement plus soutenu — texte accent (mêmes usages
+ *                  qu'avant la bascule sombre ; les deux passent large AAA
+ *                  ici, conservés pour ne pas renommer tout le code)
+ *   surface      : panneaux/cartes élevés par rapport au fond (niveau 1)
+ *   surface-2    : élévation supplémentaire (niveau 2)
+ *   border       : bordure discrète sur fond sombre
  */
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a; /* slate-900 */
+  /* Chrome natif (inputs, scrollbars, date pickers…) rendu sombre par
+     défaut — sinon les navigateurs affichent des contrôles de formulaire
+     clairs quel que soit le CSS applicatif. */
+  color-scheme: dark;
 
-  --brand: #0f1e2e; /* bleu nuit métal */
-  --brand-2: #1e2f42; /* bleu nuit métal, un ton au-dessus (profondeur) */
-  --brand-foreground: #f8fafc;
+  --background: #121212; /* anthracite profond */
+  --foreground: #f2f0ea; /* blanc cassé chaud, pas de blanc pur */
 
-  --accent: #f59e0b; /* ambre — fonds boutons / texte sur fond sombre uniquement */
-  --accent-foreground: #0f1e2e;
-  --accent-strong: #b45309; /* ambre foncé — texte accent sur fond clair (AA) */
+  --brand: #0a0a0a; /* noir mat, header/footer */
+  --brand-2: #171717; /* un ton au-dessus, pour la profondeur */
+  --brand-foreground: #f2f0ea;
 
-  --surface: #f1f5f9; /* slate-100 */
-  --surface-2: #e8edf3; /* légèrement plus soutenu, pour l'alternance */
-  --border: #dbe3ec; /* acier clair */
+  --accent: #d4af37; /* or brossé */
+  --accent-foreground: #121212;
+  --accent-strong: #c9a227; /* or plus soutenu, texte */
+  --accent-muted: #8a7434; /* or assourdi — bordures discrètes, icônes secondaires */
+
+  --surface: #1a1a1a;
+  --surface-2: #232323;
+  --border: #2a2a2a;
 }
 
 /*
- * @theme inline, comme pour les couleurs et --font-sans : convention du
- * template Next.js. Les valeurs radius/shadow sont ici littérales (pas de
- * `var(--x)` qui pointerait vers une variable :root du même nom) — un seul
- * point de déclaration, pas d'ambiguïté de cascade layer possible.
+ * @theme inline : les valeurs radius/shadow sont littérales (pas de
+ * `var(--x)` homonyme) — un seul point de déclaration, pas d'ambiguïté de
+ * cascade layer possible.
  */
 @theme inline {
   --color-background: var(--background);
@@ -45,22 +52,33 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent-strong: var(--accent-strong);
+  --color-accent-muted: var(--accent-muted);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
   --color-border: var(--border);
 
-  /* Radius nettement plus généreux que le rounded-lg par défaut (0.5rem) —
-     signature visuelle "carte premium" plutôt que gabarit Tailwind standard. */
+  /* Radius généreux — signature "carte premium". */
   --radius-card: 1.25rem;
   --radius-pill: 9999px;
 
-  /* Ombres visibles au repos (pas juste au hover) : profondeur perceptible
-     sans être clinquante. */
-  --shadow-card: 0 2px 4px rgba(15, 30, 46, 0.06), 0 16px 32px -12px rgba(15, 30, 46, 0.22);
-  --shadow-card-hover: 0 4px 8px rgba(15, 30, 46, 0.08), 0 24px 40px -14px rgba(15, 30, 46, 0.28);
-  --shadow-cta: 0 10px 24px -6px rgba(245, 158, 11, 0.55);
+  /* Sur fond sombre, l'ombre noire classique ne "lit" plus : la profondeur
+     vient d'un halo doré subtil au repos, renforcé au survol (glow demandé
+     dans la direction "micro-interactions"). */
+  --shadow-card: 0 1px 0 0 rgba(255, 255, 255, 0.04) inset, 0 16px 32px -16px rgba(0, 0, 0, 0.6);
+  --shadow-card-hover: 0 1px 0 0 rgba(255, 255, 255, 0.06) inset, 0 0 32px -4px rgba(212, 175, 55, 0.35), 0 20px 40px -16px rgba(0, 0, 0, 0.7);
+  --shadow-cta: 0 0 0 1px rgba(212, 175, 55, 0.4), 0 10px 28px -8px rgba(212, 175, 55, 0.55);
+  --shadow-glow: 0 0 40px rgba(212, 175, 55, 0.25);
 
   --font-sans: var(--font-geist-sans);
+}
+
+html,
+body {
+  /* Filet de sécurité : les effets décoratifs en bord d'écran (halo du
+     hero, silhouette SVG, glow…) ne doivent jamais provoquer de défilement
+     horizontal de la page. `clip` (et non `hidden`) pour ne pas transformer
+     <body> en conteneur de scroll et casser le `position: sticky` du header. */
+  overflow-x: clip;
 }
 
 body {
@@ -68,25 +86,28 @@ body {
 }
 
 @layer components {
-  /* Anneau de focus clavier pour les éléments interactifs sur fond clair. */
-  .focus-ring {
-    outline: none;
-  }
-  .focus-ring:focus-visible {
-    outline: none;
-    box-shadow:
-      0 0 0 2px var(--background),
-      0 0 0 4px var(--accent-strong);
-  }
-
-  /* Idem, pour les éléments interactifs sur fond sombre (brand). */
+  /* Anneau de focus clavier — un seul style : tout le site est sombre. */
+  .focus-ring,
   .focus-ring-invert {
     outline: none;
   }
+  .focus-ring:focus-visible,
   .focus-ring-invert:focus-visible {
     outline: none;
     box-shadow:
-      0 0 0 2px var(--brand),
+      0 0 0 2px var(--background),
       0 0 0 4px var(--accent);
+  }
+}
+
+/* Respect strict de prefers-reduced-motion : neutralise toute animation
+   CSS résiduelle (Framer Motion gère sa propre désactivation côté JS via
+   MotionConfig reducedMotion="user", voir motion/MotionProvider.tsx). */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
