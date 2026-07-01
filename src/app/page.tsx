@@ -165,7 +165,7 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} className="hidden lg:block">
             <ZoneMap />
           </Reveal>
         </div>
