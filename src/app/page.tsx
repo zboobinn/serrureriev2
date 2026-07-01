@@ -193,7 +193,7 @@ export default function Home() {
             {
               icon: Star,
               value: `${averageRating}/5`,
-              label: `Note moyenne sur ${reviewCount} avis clients`,
+              label: `Note moyenne sur ${reviewCount} avis clients vérifiés`,
             },
             {
               icon: FileCheck,
