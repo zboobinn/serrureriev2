@@ -37,6 +37,15 @@ export interface Zone {
   limitrophes: string[];
   /** true pour la zone où se trouve le siège (à mettre en avant) */
   siege?: boolean;
+  /**
+   * Contenu rédactionnel UNIQUE écrit à la main, pour enrichir en priorité
+   * les zones stratégiques (les 9 arrondissements + Villeurbanne) et renforcer
+   * l'unicité SEO au-delà de ce que génèrent déjà `angleSerrurier`/`quartiers`.
+   * Chaque entrée = un paragraphe. Optionnel : si absent, la page compose son
+   * contenu à partir des autres champs (aucune page ne reste vide).
+   * // À COMPLÉTER PAR LE CLIENT (zone par zone, quand le temps le permet)
+   */
+  texteUnique?: string[];
 }
 
 export const zones: Zone[] = [

@@ -71,18 +71,21 @@ export const SITE = {
   /**
    * URL canonique du site en production. Surchargée par la variable
    * d'environnement NEXT_PUBLIC_SITE_URL (voir .env.local.example, à venir).
+   *
+   * ⚠️ Domaine historique à conserver (autorité SEO déjà acquise) : le nouveau
+   * site se déploie sur serrurerie-roland.com. Version SANS www, à garder
+   * constante partout (canonical, sitemap, robots).
    */
-  // À COMPLÉTER PAR LE CLIENT (domaine définitif)
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.serrurerie-roland.fr",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://serrurerie-roland.com",
 
   /**
-   * Profils externes (sameAs du JSON-LD). Laissés vides tant que les URL
-   * réelles ne sont pas fournies — n'apparaîtront pas dans le schema si vides.
+   * Profils externes (sameAs du JSON-LD). N'apparaissent dans le schema que
+   * s'ils sont renseignés.
    */
   social: {
-    // À COMPLÉTER PAR LE CLIENT
+    facebook: "https://www.facebook.com/profile.php?id=100077506359848",
+    // À COMPLÉTER PAR LE CLIENT (si existants)
     googleBusiness: "" as string,
-    facebook: "" as string,
     instagram: "" as string,
   },
 } as const;
