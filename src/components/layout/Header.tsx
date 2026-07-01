@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Phone } from "lucide-react";
 import { SITE, telHref } from "@/data/site";
 
 /**
@@ -37,8 +38,9 @@ export function Header() {
 
         <a
           href={telHref}
-          className="focus-ring-invert rounded-pill bg-accent px-4 py-2 text-sm font-bold text-brand shadow-cta transition-colors hover:bg-accent/90"
+          className="focus-ring-invert inline-flex items-center gap-2 rounded-pill bg-accent px-4 py-2 text-sm font-bold text-brand shadow-cta transition-colors hover:bg-accent/90"
         >
+          <Phone aria-hidden="true" className="size-4" />
           <span className="hidden sm:inline">Appeler&nbsp;</span>
           {SITE.phone}
         </a>

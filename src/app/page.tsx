@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  Award,
+  Clock,
+  FileCheck,
+  Phone,
+  Star,
+} from "lucide-react";
 
 import { SITE, telHref } from "@/data/site";
 import { services, serviceHref } from "@/data/services";
@@ -8,6 +15,7 @@ import { reviews, averageRating, reviewCount } from "@/data/reviews";
 import { faq } from "@/data/faq";
 import { localBusinessSchema, faqSchema } from "@/lib/json-ld";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { SERVICE_ICONS } from "@/components/sections/service-icons";
 
 /*
  * Accueil — 100 % Server Component, aucun contenu critique en client-side
@@ -55,8 +63,9 @@ export default function Home() {
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href={telHref}
-              className="focus-ring rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
+              className="focus-ring inline-flex items-center gap-2 rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
             >
+              <Phone aria-hidden="true" className="size-4" />
               Appeler le {SITE.phone}
             </a>
             <Link
@@ -75,19 +84,27 @@ export default function Home() {
           Nos services de serrurerie
         </h2>
         <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <li key={service.slug}>
-              <Link
-                href={serviceHref(service)}
-                className="focus-ring block h-full rounded-card border border-border bg-surface p-6 shadow-card transition-[border-color,box-shadow] hover:border-accent-strong hover:shadow-lg"
-              >
-                <h3 className="text-lg font-bold">{service.nom}</h3>
-                <p className="mt-2 text-sm text-foreground/70">
-                  {service.description}
-                </p>
-              </Link>
-            </li>
-          ))}
+          {services.map((service) => {
+            const Icon = SERVICE_ICONS[service.slug];
+            return (
+              <li key={service.slug}>
+                <Link
+                  href={serviceHref(service)}
+                  className="focus-ring group block h-full rounded-card border border-border bg-background p-6 shadow-card transition-[transform,box-shadow,border-color] hover:-translate-y-1 hover:border-accent-strong hover:shadow-card-hover"
+                >
+                  {Icon && (
+                    <span className="inline-flex size-11 items-center justify-center rounded-full border border-accent-strong/30 bg-surface text-accent-strong">
+                      <Icon aria-hidden="true" className="size-5" />
+                    </span>
+                  )}
+                  <h3 className="mt-4 text-lg font-bold">{service.nom}</h3>
+                  <p className="mt-2 text-sm text-foreground/70">
+                    {service.description}
+                  </p>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </section>
 
@@ -137,28 +154,32 @@ export default function Home() {
         </h2>
         <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <li className="rounded-card border border-border bg-surface p-6">
-            <p className="text-2xl font-bold text-accent-strong">{SITE.foundingYear}</p>
-            <p className="mt-2 text-sm text-foreground/70">
+            <Award aria-hidden="true" className="size-6 text-accent-strong" />
+            <p className="mt-3 text-2xl font-bold text-accent-strong">{SITE.foundingYear}</p>
+            <p className="mt-1 text-sm text-foreground/70">
               Artisan serrurier en activité depuis {SITE.foundingYear}
             </p>
           </li>
           <li className="rounded-card border border-border bg-surface p-6">
-            <p className="text-2xl font-bold text-accent-strong">24/7</p>
-            <p className="mt-2 text-sm text-foreground/70">
+            <Clock aria-hidden="true" className="size-6 text-accent-strong" />
+            <p className="mt-3 text-2xl font-bold text-accent-strong">24/7</p>
+            <p className="mt-1 text-sm text-foreground/70">
               Disponible {SITE.openingHours.label}, y compris jours fériés
             </p>
           </li>
           <li className="rounded-card border border-border bg-surface p-6">
-            <p className="text-2xl font-bold text-accent-strong">
+            <Star aria-hidden="true" className="size-6 text-accent-strong" />
+            <p className="mt-3 text-2xl font-bold text-accent-strong">
               {averageRating}/5
             </p>
-            <p className="mt-2 text-sm text-foreground/70">
+            <p className="mt-1 text-sm text-foreground/70">
               Note moyenne sur {reviewCount} avis clients
             </p>
           </li>
           <li className="rounded-card border border-border bg-surface p-6">
-            <p className="text-2xl font-bold text-accent-strong">Devis</p>
-            <p className="mt-2 text-sm text-foreground/70">
+            <FileCheck aria-hidden="true" className="size-6 text-accent-strong" />
+            <p className="mt-3 text-2xl font-bold text-accent-strong">Devis</p>
+            <p className="mt-1 text-sm text-foreground/70">
               Gratuit avant toute intervention non urgente
             </p>
           </li>
@@ -197,9 +218,17 @@ export default function Home() {
           </div>
         </div>
 
-        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/*
+          Bande défilante en CSS pur (overflow-x + scroll-snap) : les 10 avis
+          restent une <ul>/<li> normale dans le flux HTML, indexable, sans
+          JS. Pas de librairie carrousel.
+        */}
+        <ul className="mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 scrollbar-thin">
           {reviews.map((review) => (
-            <li key={review.id} className="rounded-card border border-border p-6 shadow-card">
+            <li
+              key={review.id}
+              className="w-[85%] shrink-0 snap-start rounded-card border border-border p-6 shadow-card sm:w-[45%] lg:w-[31%]"
+            >
               <div aria-hidden="true" className="text-accent-strong">
                 {"★".repeat(review.rating)}
                 {"☆".repeat(5 - review.rating)}
@@ -243,8 +272,9 @@ export default function Home() {
           </div>
           <a
             href={telHref}
-            className="focus-ring-invert rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
+            className="focus-ring-invert inline-flex items-center gap-2 rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
           >
+            <Phone aria-hidden="true" className="size-4" />
             Appeler le {SITE.phone}
           </a>
         </div>

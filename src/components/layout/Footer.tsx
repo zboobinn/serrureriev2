@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Mail, MapPin, Phone } from "lucide-react";
 import {
   SITE,
   telHref,
@@ -20,14 +21,19 @@ export function Footer() {
         {/* NAP */}
         <div>
           <h2 className="text-base font-bold text-white">{SITE.name}</h2>
-          <address className="mt-3 space-y-1 text-sm not-italic">
-            <p>{addressInline}</p>
-            <p>
+          <address className="mt-3 space-y-2 text-sm not-italic">
+            <p className="flex items-start gap-2">
+              <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-white/60" />
+              {addressInline}
+            </p>
+            <p className="flex items-center gap-2">
+              <Phone aria-hidden="true" className="size-4 shrink-0 text-white/60" />
               <a href={telHref} className="focus-ring-invert rounded-sm transition-colors hover:text-accent">
                 {SITE.phone}
               </a>
             </p>
-            <p>
+            <p className="flex items-center gap-2">
+              <Mail aria-hidden="true" className="size-4 shrink-0 text-white/60" />
               <a href={mailHref} className="focus-ring-invert rounded-sm transition-colors hover:text-accent">
                 {SITE.email}
               </a>

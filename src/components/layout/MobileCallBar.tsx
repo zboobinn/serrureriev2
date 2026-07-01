@@ -1,3 +1,4 @@
+import { Phone } from "lucide-react";
 import { SITE, telHref } from "@/data/site";
 
 /**
@@ -12,7 +13,8 @@ export function MobileCallBar() {
         className="focus-ring-invert flex w-full items-center justify-center gap-2 rounded-pill bg-accent px-5 py-3 text-base font-bold text-brand shadow-cta transition-transform active:scale-[0.98]"
         aria-label={`Appeler ${SITE.name} au ${SITE.phone}`}
       >
-        📞 Appeler — {SITE.phone}
+        <Phone aria-hidden="true" className="size-5" />
+        Appeler — {SITE.phone}
       </a>
     </div>
   );

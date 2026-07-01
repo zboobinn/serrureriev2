@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
 import { SITE, telHref, mailHref, addressInline } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/json-ld";
@@ -40,19 +41,27 @@ export default function ContactPage() {
           <div className="rounded-card border border-border bg-surface p-6 shadow-card">
             <a
               href={telHref}
-              className="focus-ring block rounded-pill bg-accent px-6 py-3 text-center font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
+              className="focus-ring flex items-center justify-center gap-2 rounded-pill bg-accent px-6 py-3 text-center font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
             >
+              <Phone aria-hidden="true" className="size-4" />
               Appeler le {SITE.phone}
             </a>
-            <address className="mt-4 space-y-1 text-sm not-italic text-foreground/80">
-              <p>{SITE.name}</p>
-              <p>{addressInline}</p>
-              <p>
+            <address className="mt-4 space-y-2 text-sm not-italic text-foreground/80">
+              <p className="font-semibold text-foreground">{SITE.name}</p>
+              <p className="flex items-start gap-2">
+                <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-strong" />
+                {addressInline}
+              </p>
+              <p className="flex items-center gap-2">
+                <Mail aria-hidden="true" className="size-4 shrink-0 text-accent-strong" />
                 <a href={mailHref} className="focus-ring rounded-sm transition-colors hover:text-accent-strong">
                   {SITE.email}
                 </a>
               </p>
-              <p>{SITE.openingHours.label}</p>
+              <p className="flex items-center gap-2">
+                <Clock aria-hidden="true" className="size-4 shrink-0 text-accent-strong" />
+                {SITE.openingHours.label}
+              </p>
             </address>
           </div>
 
@@ -71,7 +80,8 @@ export default function ContactPage() {
             rel="noopener noreferrer"
             className="focus-ring mt-6 block rounded-card border border-border bg-surface p-6 shadow-card transition-colors hover:border-accent-strong"
           >
-            <p className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
+            <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-foreground/60">
+              <MapPin aria-hidden="true" className="size-4" />
               Nous trouver
             </p>
             <p className="mt-2 text-foreground/80">{addressInline}</p>

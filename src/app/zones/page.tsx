@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MapPin } from "lucide-react";
 
 import { arrondissements, communes, zoneHref } from "@/data/zones";
 import { breadcrumbSchema } from "@/lib/json-ld";
@@ -40,8 +41,9 @@ export default function ZonesPage() {
             <li key={z.slug}>
               <Link
                 href={zoneHref(z)}
-                className="focus-ring block rounded-card border border-border bg-surface px-4 py-3 shadow-card transition-colors hover:border-accent-strong"
+                className="focus-ring flex items-center gap-2 rounded-card border border-border bg-surface px-4 py-3 shadow-card transition-[transform,box-shadow,border-color] hover:-translate-y-0.5 hover:border-accent-strong hover:shadow-card-hover"
               >
+                <MapPin aria-hidden="true" className="size-4 text-accent-strong" />
                 {z.nom}
               </Link>
             </li>
@@ -56,8 +58,9 @@ export default function ZonesPage() {
             <li key={z.slug}>
               <Link
                 href={zoneHref(z)}
-                className="focus-ring block rounded-card border border-border bg-surface px-4 py-3 shadow-card transition-colors hover:border-accent-strong"
+                className="focus-ring flex items-center gap-2 rounded-card border border-border bg-surface px-4 py-3 shadow-card transition-[transform,box-shadow,border-color] hover:-translate-y-0.5 hover:border-accent-strong hover:shadow-card-hover"
               >
+                <MapPin aria-hidden="true" className="size-4 text-accent-strong" />
                 {z.nom}
                 {z.siege && (
                   <span className="ml-2 text-xs font-semibold text-accent-strong">

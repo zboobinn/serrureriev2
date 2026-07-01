@@ -28,14 +28,14 @@
   --surface: #f1f5f9; /* slate-100 */
   --surface-2: #e8edf3; /* légèrement plus soutenu, pour l'alternance */
   --border: #dbe3ec; /* acier clair */
-
-  --radius-card: 0.875rem;
-  --radius-pill: 9999px;
-
-  --shadow-card: 0 1px 2px rgba(15, 30, 46, 0.06), 0 8px 24px -12px rgba(15, 30, 46, 0.18);
-  --shadow-cta: 0 8px 20px -8px rgba(245, 158, 11, 0.45);
 }
 
+/*
+ * @theme inline, comme pour les couleurs et --font-sans : convention du
+ * template Next.js. Les valeurs radius/shadow sont ici littérales (pas de
+ * `var(--x)` qui pointerait vers une variable :root du même nom) — un seul
+ * point de déclaration, pas d'ambiguïté de cascade layer possible.
+ */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -49,11 +49,16 @@
   --color-surface-2: var(--surface-2);
   --color-border: var(--border);
 
-  --radius-card: var(--radius-card);
-  --radius-pill: var(--radius-pill);
+  /* Radius nettement plus généreux que le rounded-lg par défaut (0.5rem) —
+     signature visuelle "carte premium" plutôt que gabarit Tailwind standard. */
+  --radius-card: 1.25rem;
+  --radius-pill: 9999px;
 
-  --shadow-card: var(--shadow-card);
-  --shadow-cta: var(--shadow-cta);
+  /* Ombres visibles au repos (pas juste au hover) : profondeur perceptible
+     sans être clinquante. */
+  --shadow-card: 0 2px 4px rgba(15, 30, 46, 0.06), 0 16px 32px -12px rgba(15, 30, 46, 0.22);
+  --shadow-card-hover: 0 4px 8px rgba(15, 30, 46, 0.08), 0 24px 40px -14px rgba(15, 30, 46, 0.28);
+  --shadow-cta: 0 10px 24px -6px rgba(245, 158, 11, 0.55);
 
   --font-sans: var(--font-geist-sans);
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { MapPin, Phone } from "lucide-react";
 
 import { allZoneSlugs, zoneHref, getLimitrophes } from "@/data/zones";
 import { SITE, telHref } from "@/data/site";
@@ -89,6 +90,7 @@ export default async function ZonePage({
 
       <header className="mt-4">
         <p className="inline-flex items-center gap-2 rounded-pill border border-border bg-surface px-3 py-1 text-sm font-semibold uppercase tracking-wide text-accent-strong">
+          <MapPin aria-hidden="true" className="size-4" />
           {zone.codePostal} · {zone.secteur}
         </p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
@@ -143,8 +145,9 @@ export default async function ZonePage({
       <section className="mt-10 flex flex-wrap gap-4 rounded-card border border-border bg-surface p-6">
         <a
           href={telHref}
-          className="focus-ring rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
+          className="focus-ring inline-flex items-center gap-2 rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
         >
+          <Phone aria-hidden="true" className="size-4" />
           Appeler le {SITE.phone}
         </a>
         <Link

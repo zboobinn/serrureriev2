@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Check, Phone } from "lucide-react";
 
 import { SITE, telHref } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/json-ld";
@@ -37,12 +38,22 @@ export default function AProposPage() {
       <section className="mt-8">
         <h2 className="text-xl font-bold">Notre engagement</h2>
         <ul className="mt-3 space-y-2 text-foreground/80">
-          <li>• Disponibilité {SITE.openingHours.label} pour les urgences</li>
-          <li>• Intervention soignée, sans dégât inutile sur vos portes</li>
-          <li>• Devis clair avant toute intervention non urgente</li>
-          <li>
-            • Une connaissance fine du bâti lyonnais, de l&apos;immeuble
-            ancien du Vieux Lyon aux résidences récentes du Grand Lyon
+          <li className="flex gap-2">
+            <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-strong" />
+            Disponibilité {SITE.openingHours.label} pour les urgences
+          </li>
+          <li className="flex gap-2">
+            <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-strong" />
+            Intervention soignée, sans dégât inutile sur vos portes
+          </li>
+          <li className="flex gap-2">
+            <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-strong" />
+            Devis clair avant toute intervention non urgente
+          </li>
+          <li className="flex gap-2">
+            <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-strong" />
+            Une connaissance fine du bâti lyonnais, de l&apos;immeuble ancien
+            du Vieux Lyon aux résidences récentes du Grand Lyon
           </li>
         </ul>
       </section>
@@ -66,8 +77,9 @@ export default function AProposPage() {
         <h2 className="text-xl font-bold">Une urgence ?</h2>
         <a
           href={telHref}
-          className="focus-ring mt-4 inline-block rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
+          className="focus-ring mt-4 inline-flex items-center gap-2 rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
         >
+          <Phone aria-hidden="true" className="size-4" />
           Appeler le {SITE.phone}
         </a>
       </section>
