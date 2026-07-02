@@ -83,9 +83,8 @@ export const SITE = {
    */
   social: {
     facebook: "https://www.facebook.com/profile.php?id=100077506359848",
-    // À COMPLÉTER PAR LE CLIENT (si existants)
-    googleBusiness: "" as string,
-    instagram: "" as string,
+    googleBusiness: "https://maps.app.goo.gl/tQZwZKDJbmZ4MWfQ7" as string,
+    instagram: "https://www.instagram.com/serrurier_roland/" as string,
   },
 } as const;
 
