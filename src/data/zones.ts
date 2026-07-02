@@ -219,7 +219,7 @@ export const zones: Zone[] = [
     secteur: "Nord de Lyon, entre Rhône et Saône",
     quartiers: ["Caluire centre", "Cuire", "Montessuy", "Bissardon", "Saint-Clair", "Vassieux"],
     pointsDeRepere: ["bords de Saône et du Rhône", "Île Barbe (proximité)", "quartier de Saint-Clair"],
-    caractere: "commune résidentielle aisée, pavillonnaire et calme",
+    caractere: "résidentielle aisée, pavillonnaire et calme",
     typeBati: "maisons individuelles et petites copropriétés résidentielles",
     angleSerrurier:
       "Habitat majoritairement pavillonnaire : forte demande de portes blindées, de serrures haute sécurité et de sécurisation de maisons individuelles, ainsi que de portails et portes de garage motorisés.",
@@ -234,7 +234,7 @@ export const zones: Zone[] = [
     secteur: "Est de Lyon",
     quartiers: ["Bron centre", "Terraillon", "Parilly", "UMV"],
     pointsDeRepere: ["Aéroport de Bron", "Parc de Parilly", "hôpitaux Est (Pinel, neurologique)"],
-    caractere: "commune de l'est mêlant résidentiel et zones d'activité",
+    caractere: "de l'est mêlant résidentiel et zones d'activité",
     typeBati: "mix de copropriétés, de pavillons et de locaux d'activité",
     angleSerrurier:
       "Habitat varié et présence de zones d'activité : dépannages résidentiels courants et sécurisation de locaux professionnels et commerciaux (rideaux métalliques, serrures renforcées).",
@@ -249,7 +249,7 @@ export const zones: Zone[] = [
     secteur: "Sud-est de Lyon",
     quartiers: ["Vénissieux centre", "Les Minguettes", "Parilly", "Moulin à Vent"],
     pointsDeRepere: ["Marché de Vénissieux", "Parc de Parilly", "zones industrielles sud-est"],
-    caractere: "commune populaire et dense, résidentielle et industrielle",
+    caractere: "populaire et dense, résidentielle et industrielle",
     typeBati: "grands ensembles, copropriétés et importantes zones d'activité",
     angleSerrurier:
       "Dépannages d'urgence fréquents dans l'habitat collectif dense, et forte demande de sécurisation (rideaux métalliques, portes blindées, serrures anti-effraction) pour les commerces et locaux professionnels des zones d'activité.",
@@ -264,7 +264,7 @@ export const zones: Zone[] = [
     secteur: "Est de Lyon, le long du canal de Jonage",
     quartiers: ["Le Village", "Mas du Taureau", "La Grappinière", "Carré de Soie"],
     pointsDeRepere: ["Planétarium de Vaulx-en-Velin", "pôle du Carré de Soie", "canal de Jonage"],
-    caractere: "commune en rénovation urbaine, entre logements collectifs et secteurs pavillonnaires",
+    caractere: "en rénovation urbaine, entre logements collectifs et secteurs pavillonnaires",
     typeBati: "grands ensembles rénovés, pavillons au Village et résidences neuves au Carré de Soie",
     angleSerrurier:
       "Interventions d'urgence dans l'habitat collectif et sécurisation des résidences neuves du Carré de Soie (contrôles d'accès, serrures multipoints), avec du blindage pour les pavillons du Village.",
@@ -279,7 +279,7 @@ export const zones: Zone[] = [
     secteur: "Sud-est de la métropole",
     quartiers: ["Saint-Priest centre", "Bel Air", "Manissieux", "Revaison"],
     pointsDeRepere: ["Château de Saint-Priest", "Parc technologique de Lyon", "zones industrielles est"],
-    caractere: "commune pavillonnaire dotée d'importantes zones d'activité",
+    caractere: "pavillonnaire dotée d'importantes zones d'activité",
     typeBati: "maisons individuelles, lotissements récents et parcs d'activité",
     angleSerrurier:
       "Prédominance de maisons individuelles et de lotissements : blindage, portails et portes de garage motorisés, serrures haute sécurité, complétés par la sécurisation des entreprises du parc technologique.",
@@ -294,7 +294,7 @@ export const zones: Zone[] = [
     secteur: "Ouest de Lyon",
     quartiers: ["Écully centre", "Le Pérollier", "Charrière Blanche"],
     pointsDeRepere: ["emlyon business school", "École Centrale de Lyon", "quartiers résidentiels boisés"],
-    caractere: "commune résidentielle cossue de l'ouest lyonnais",
+    caractere: "résidentielle cossue de l'ouest lyonnais",
     typeBati: "maisons individuelles de standing et résidences haut de gamme",
     angleSerrurier:
       "Clientèle exigeante en sécurité : portes blindées, serrures certifiées A2P, coffres et sécurisation de propriétés individuelles, avec un travail soigné attendu sur des menuiseries de qualité.",
@@ -309,7 +309,7 @@ export const zones: Zone[] = [
     secteur: "Ouest de Lyon",
     quartiers: ["La Demi-Lune", "Le Méridien", "Alaï"],
     pointsDeRepere: ["Horloge de Tassin", "vallon des Planches", "axes vers l'ouest lyonnais"],
-    caractere: "commune résidentielle familiale de l'ouest",
+    caractere: "résidentielle familiale de l'ouest",
     typeBati: "maisons individuelles et résidences récentes",
     angleSerrurier:
       "Habitat pavillonnaire et petites copropriétés : demande soutenue de blindage, de serrures haute sécurité et de motorisation de portails/portes de garage pour les maisons familiales.",
@@ -324,7 +324,7 @@ export const zones: Zone[] = [
     secteur: "Sud de Lyon, rive droite du Rhône",
     quartiers: ["Oullins centre", "La Saulaie", "Le Golf"],
     pointsDeRepere: ["terminus de la ligne B (Oullins Gare)", "bords de Saône", "Grande Rue commerçante"],
-    caractere: "commune en développement, bien desservie par le métro",
+    caractere: "en développement, bien desservie par le métro",
     typeBati: "mix d'immeubles anciens du centre, de copropriétés et de programmes neufs",
     angleSerrurier:
       "Centre-ville commerçant et arrivée du métro dynamisent l'habitat : dépannages d'urgence dans les copropriétés, changements de serrures dans l'ancien et équipement des résidences neuves.",
@@ -339,7 +339,7 @@ export const zones: Zone[] = [
     secteur: "Sud-ouest, sur les coteaux",
     quartiers: ["Sainte-Foy centre", "Le Plan du Loup", "La Gravière", "Beaunant"],
     pointsDeRepere: ["coteaux avec vue sur Lyon", "centre-bourg résidentiel", "proximité du Vieux Lyon"],
-    caractere: "commune résidentielle aisée perchée sur les collines",
+    caractere: "résidentielle aisée perchée sur les collines",
     typeBati: "maisons individuelles et résidences de standing",
     angleSerrurier:
       "Habitat pavillonnaire cossu sur les hauteurs : forte demande de portes blindées, serrures haute sécurité, portails et sécurisation périmétrique des propriétés.",
@@ -354,7 +354,7 @@ export const zones: Zone[] = [
     secteur: "Sud-ouest de la métropole",
     quartiers: ["Saint-Genis centre", "Beaunant", "Basses Barolles"],
     pointsDeRepere: ["Observatoire de Lyon", "hôpitaux sud", "centre-bourg"],
-    caractere: "commune résidentielle du sud-ouest, en extension du métro",
+    caractere: "résidentielle du sud-ouest, en extension du métro",
     typeBati: "maisons individuelles, lotissements et petites résidences",
     angleSerrurier:
       "Zone majoritairement pavillonnaire : blindage, serrures haute sécurité, portails et portes de garage motorisés pour maisons familiales, avec du dépannage courant dans les résidences.",
@@ -369,7 +369,7 @@ export const zones: Zone[] = [
     secteur: "Est de la métropole",
     quartiers: ["Décines centre", "Le Sixième", "Grand Large"],
     pointsDeRepere: ["Groupama Stadium (Parc OL)", "plan d'eau du Grand Large", "canal de Jonage"],
-    caractere: "commune en forte croissance, pavillonnaire et sportive",
+    caractere: "en forte croissance, pavillonnaire et sportive",
     typeBati: "maisons individuelles, lotissements récents et nouvelles résidences",
     angleSerrurier:
       "Croissance résidentielle rapide : équipement de maisons et résidences neuves (serrures multipoints, portails, portes de garage) et blindage des pavillons, avec du dépannage d'urgence dans les lotissements.",
@@ -384,7 +384,7 @@ export const zones: Zone[] = [
     secteur: "Est de la métropole, près du Grand Parc",
     quartiers: ["Meyzieu centre", "Le Carreau", "zone industrielle"],
     pointsDeRepere: ["Grand Large", "proximité du Parc de Miribel-Jonage", "tramway T3 / Rhônexpress"],
-    caractere: "commune pavillonnaire en expansion à l'est de l'agglomération",
+    caractere: "pavillonnaire en expansion à l'est de l'agglomération",
     typeBati: "maisons individuelles, lotissements et zone industrielle",
     angleSerrurier:
       "Tissu pavillonnaire et zone industrielle : blindage et serrures haute sécurité pour les maisons, sécurisation des entreprises et locaux (rideaux métalliques, serrures renforcées) sur la ZI.",

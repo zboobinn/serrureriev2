@@ -68,9 +68,9 @@ export default function MentionsLegalesPage() {
           CA 91789, États-Unis.
         </p>
         <p className="text-sm text-foreground/50">
-          {/* À vérifier avant publication : l'adresse officielle de
-              l'hébergeur peut évoluer. Se référer à vercel.com/legal. */}
+          {/*
           Adresse à vérifier avant mise en ligne (vercel.com/legal).
+          */}
         </p>
       </section>
 
