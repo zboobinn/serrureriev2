@@ -178,7 +178,7 @@ export default function Home() {
                   arrondissements de Lyon et dans l&apos;ensemble des communes
                   du Grand Lyon.
                 </p>
-                <ul className="mt-6 flex flex-wrap gap-3">
+                <ul className="mt-6 flex flex-wrap gap-x-2 gap-y-5">
                   {siege && (
                     <li>
                       <Link
