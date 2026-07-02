@@ -23,7 +23,7 @@ export function ZoneMap() {
   // Chaîne assemblée en amont : un seul nœud texte dans le <title>, pour
   // éviter tout risque de désync d'hydratation entre les fragments de texte
   // et les expressions interpolées (voir incident hydration mismatch).
-
+  const titre = `Carte de la zone d'intervention : ${innerCount} arrondissements et ${outerCount} communes autour du siège de Villeurbanne`;
 
   return (
     <svg
@@ -32,7 +32,7 @@ export function ZoneMap() {
       aria-labelledby="zone-map-title"
       className="mx-auto h-auto w-full max-w-sm"
     >
-
+      <title id="zone-map-title">{titre}</title>
       <circle cx="160" cy="160" r="128" fill="none" stroke="var(--border)" strokeDasharray="2 6" />
       <circle cx="160" cy="160" r="70" fill="none" stroke="var(--border)" strokeDasharray="2 6" />
 
