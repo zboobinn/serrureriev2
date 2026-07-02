@@ -41,7 +41,6 @@ export default function MentionsLegalesPage() {
         <h2 className="text-xl font-bold">Éditeur du site</h2>
         <p>Raison sociale : {SITE.name}</p>
         <p>Forme juridique : Entrepreneur individuel</p>
-        {/* À COMPLÉTER PAR LE CLIENT */}
         <p>Capital social (le cas échéant) : Aucun</p>
         <p>Adresse du siège : {addressInline}</p>
         <p>
@@ -57,15 +56,9 @@ export default function MentionsLegalesPage() {
           </a>
         </p>
         <p>Numéro SIRET : 45359868200046</p>
-        {/* À COMPLÉTER PAR LE CLIENT */}
-        <p>
-          Immatriculation (RCS ou Répertoire des Métiers) : À COMPLÉTER PAR LE
-          CLIENT
-        </p>
-        {/* À COMPLÉTER PAR LE CLIENT */}
+        {/*<p>Immatriculation (RCS ou Répertoire des Métiers) : À COMPLÉTER PAR LE CLIENT</p>*/}
         <p>Numéro de TVA intracommunautaire (le cas échéant) : FR33453598682</p>
-        {/* À COMPLÉTER PAR LE CLIENT */}
-        <p>Directeur de la publication : À COMPLÉTER PAR LE CLIENT</p>
+        <p>Directeur de la publication : Roland NOAILLES</p>
       </section>
 
       <section className="mt-8 space-y-2 text-foreground/80">
@@ -90,8 +83,9 @@ export default function MentionsLegalesPage() {
           civile professionnelle et, pour les travaux relevant du gros
           œuvre ou du second œuvre du bâtiment, par une garantie décennale.
         </p>
-        {/* À COMPLÉTER PAR LE CLIENT */}
+        {/*
         <p>Assureur et numéro de police : À COMPLÉTER PAR LE CLIENT</p>
+        */}
       </section>
 
       <section className="mt-8 space-y-2 text-foreground/80">
@@ -102,11 +96,12 @@ export default function MentionsLegalesPage() {
           entreprise, le client peut recourir gratuitement à un médiateur de
           la consommation.
         </p>
-        {/* À COMPLÉTER PAR LE CLIENT */}
+        {/*}
         <p>
           Médiateur compétent, coordonnées et site internet : À COMPLÉTER PAR
           LE CLIENT
         </p>
+        */}
       </section>
 
       <section className="mt-8 space-y-2 text-foreground/80">
