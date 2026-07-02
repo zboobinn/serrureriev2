@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { AnimatePresence, m, useMotionValueEvent, useScroll } from "framer-motion";
 import { Phone } from "lucide-react";
 import { SITE, telHref } from "@/data/site";
 
@@ -23,7 +23,7 @@ export function StickyCallButton() {
   return (
     <AnimatePresence>
       {visible && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
@@ -38,7 +38,7 @@ export function StickyCallButton() {
             <Phone aria-hidden="true" className="size-5 text-accent" />
             Appeler — {SITE.phone}
           </a>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

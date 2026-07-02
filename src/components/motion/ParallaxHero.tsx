@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 
 /**
  * Effet de parallaxe au premier scroll : le contenu (texte + CTA, déjà
@@ -32,13 +32,13 @@ export function ParallaxHero({
   return (
     <div ref={ref} className="relative isolate overflow-hidden">
       {background && (
-        <motion.div aria-hidden="true" style={{ y: backgroundY }} className="absolute inset-0 -z-10">
+        <m.div aria-hidden="true" style={{ y: backgroundY }} className="absolute inset-0 -z-10">
           {background}
-        </motion.div>
+        </m.div>
       )}
-      <motion.div style={{ y: contentY, opacity: contentOpacity }}>
+      <m.div style={{ y: contentY, opacity: contentOpacity }}>
         {children}
-      </motion.div>
+      </m.div>
     </div>
   );
 }
