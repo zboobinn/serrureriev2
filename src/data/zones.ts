@@ -46,6 +46,13 @@ export interface Zone {
    * // À COMPLÉTER PAR LE CLIENT (zone par zone, quand le temps le permet)
    */
   texteUnique?: string[];
+  /**
+   * Slugs des services les plus pertinents pour cette zone (maillage interne
+   * ciblé, page zone → services). Optionnel : à défaut,
+   * `getRelevantServicesForZone()` (@/lib/maillage) déduit les services
+   * pertinents à partir des mots-clés retrouvés dans `angleSerrurier`.
+   */
+  servicesPertinents?: string[];
 }
 
 export const zones: Zone[] = [

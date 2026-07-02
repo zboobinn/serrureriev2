@@ -4,9 +4,11 @@ import { notFound } from "next/navigation";
 import { MapPin, Phone } from "lucide-react";
 
 import { allZoneSlugs, zoneHref, getLimitrophes } from "@/data/zones";
+import { serviceHref } from "@/data/services";
 import { SITE, telHref } from "@/data/site";
 import { zoneSlugParam, resolveZoneFromParam } from "@/lib/zone-routing";
 import { breadcrumbSchema } from "@/lib/json-ld";
+import { getRelevantServicesForZone } from "@/lib/maillage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 
@@ -42,8 +44,14 @@ export async function generateMetadata({
   const zone = resolveZoneFromParam(zoneSlug);
   if (!zone) notFound();
 
-  const title = `Serrurier à ${zone.nomComplet} — dépannage 24h/24`;
-  const description = `Serrurier à ${zone.nomComplet} (${zone.codePostal}) : dépannage d'urgence, ouverture de porte, portes blindées et serrures haute sécurité. Intervention rapide dans ${zone.secteur.toLowerCase()}.`;
+  // `nom` (court) plutôt que `nomComplet` : garde le titre complet (avec le
+  // suffixe " | Serrurerie Roland" ajouté par title.template) sous ~60
+  // caractères, y compris sur les 9 arrondissements. N'affecte pas le H1
+  // (qui utilise toujours `nomComplet`, voir plus bas).
+  const title = `Serrurier ${zone.nom} 24h/24`;
+  // Gabarit volontairement compact (< 155 caractères sur les 22 zones) pour
+  // ne pas être tronqué dans les SERP.
+  const description = `Serrurier à ${zone.nomComplet} (${zone.codePostal}), 24h/24 : dépannage, ouverture de porte, porte blindée. Devis gratuit, intervention rapide.`;
   const canonical = zoneHref(zone);
 
   return {
@@ -68,6 +76,7 @@ export default async function ZonePage({
   if (!zone) notFound();
 
   const limitrophes = getLimitrophes(zone.slug);
+  const servicesPertinents = getRelevantServicesForZone(zone);
 
   const breadcrumbItems = [
     { name: "Accueil", url: "/" },
@@ -92,6 +101,16 @@ export default async function ZonePage({
         <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
           Serrurier à {zone.nomComplet}
         </h1>
+
+        {/* CTA d'appel immédiat — visible sans scroll, avant tout contenu
+            rédactionnel (le CTA de fin de page reste en place en renfort). */}
+        <a
+          href={telHref}
+          className="focus-ring mt-6 inline-flex items-center gap-2 rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
+        >
+          <Phone aria-hidden="true" className="size-4" />
+          Appeler le {SITE.phone}
+        </a>
       </header>
 
       {/* Intro — ancrée sur le caractère du secteur et ses repères réels */}
@@ -174,23 +193,36 @@ export default async function ZonePage({
       )}
 
       {/*
-        Maillage vers les services : en attente de data/services.ts et des
-        pages /services/* (ÉTAPE 4). Le hub /services existe déjà en lien ici
-        pour ne pas laisser d'impasse tant que les pages individuelles ne
-        sont pas construites.
+        Maillage ciblé vers les services : `getRelevantServicesForZone`
+        (@/lib/maillage) croise `angleSerrurier` avec les mots-clés de chaque
+        service pour ne lier ici que ceux réellement pertinents pour cette
+        zone, plutôt qu'un renvoi générique vers le hub /services.
       */}
       <section className="mt-10">
-        <h2 className="text-xl font-bold">Nos services</h2>
+        <h2 className="text-xl font-bold">Nos services à {zone.nom}</h2>
         <p className="mt-3 text-foreground/80">
-          Découvrez l&apos;ensemble de nos prestations de serrurerie
-          disponibles à {zone.nom}.
+          Les prestations les plus demandées dans le secteur :
         </p>
-        <Link
-          href="/services"
-          className="focus-ring mt-3 inline-block rounded-sm font-semibold text-accent-strong underline-offset-2 hover:underline"
-        >
-          Voir tous nos services →
-        </Link>
+        <ul className="mt-3 flex flex-wrap gap-3 text-sm">
+          {servicesPertinents.map((service) => (
+            <li key={service.slug}>
+              <Link
+                href={serviceHref(service)}
+                className="focus-ring rounded-sm font-semibold text-accent-strong underline-offset-2 hover:underline"
+              >
+                {service.nom} à {zone.nom}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Link
+              href="/services"
+              className="focus-ring rounded-sm font-semibold text-accent-strong underline-offset-2 hover:underline"
+            >
+              Voir tous nos services →
+            </Link>
+          </li>
+        </ul>
       </section>
     </article>
   );

@@ -11,12 +11,15 @@ import { serviceHref } from "@/data/services";
  */
 export function buildServiceMetadata(service: Service): Metadata {
   const canonical = serviceHref(service);
+  // `metaTitre` (SERP, plus court) prime sur `titre` (H1, plus descriptif) —
+  // n'affecte jamais le H1 rendu par ServiceTemplate.
+  const title = service.metaTitre ?? service.titre;
   return {
-    title: service.titre,
+    title,
     description: service.description,
     alternates: { canonical },
     openGraph: {
-      title: service.titre,
+      title,
       description: service.description,
       url: canonical,
     },

@@ -15,6 +15,13 @@ export interface Service {
   nom: string;
   /** Titre H1 de la page service. */
   titre: string;
+  /**
+   * Titre `<title>` (SERP) optionnel, plus court que `titre`. N'affecte pas
+   * le H1 — sert uniquement à tenir sous ~60 caractères une fois le suffixe
+   * de marque (" | Serrurerie Roland") ajouté par `title.template`. Si
+   * absent, `buildServiceMetadata()` retombe sur `titre`.
+   */
+  metaTitre?: string;
   /** Description courte pour meta description / cartes. */
   description: string;
   /** Paragraphe d'introduction, en tête de page. */
@@ -25,6 +32,13 @@ export interface Service {
   pourQui: string;
   /** true si le service relève typiquement de l'urgence (24/7 mis en avant). */
   urgence?: boolean;
+  /**
+   * Slugs des zones où ce service est le plus pertinent (maillage interne
+   * ciblé, page service → zones). Optionnel : à défaut, `getRelevantZonesForService()`
+   * (@/lib/maillage) déduit les zones pertinentes à partir des mots-clés du
+   * service retrouvés dans `Zone.angleSerrurier`.
+   */
+  zonesPertinentes?: string[];
 }
 
 export const services: Service[] = [
@@ -69,6 +83,7 @@ export const services: Service[] = [
     slug: "portes-de-garage",
     nom: "Portes de garage",
     titre: "Portes de garage : pose, motorisation et dépannage à Lyon",
+    metaTitre: "Porte de garage : pose, dépannage Lyon",
     description:
       "Installation, motorisation et réparation de portes de garage à Lyon et dans le Grand Lyon, pour maisons individuelles et locaux d'activité.",
     intro:
@@ -87,6 +102,7 @@ export const services: Service[] = [
     slug: "rideaux-metalliques",
     nom: "Rideaux métalliques",
     titre: "Rideaux métalliques : installation et réparation à Lyon",
+    metaTitre: "Rideau métallique : pose, dépannage Lyon",
     description:
       "Installation, réparation et sécurisation de rideaux métalliques de commerces et locaux professionnels à Lyon et dans le Grand Lyon.",
     intro:

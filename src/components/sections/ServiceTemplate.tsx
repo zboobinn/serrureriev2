@@ -2,9 +2,10 @@ import Link from "next/link";
 import { Check, Clock, Phone } from "lucide-react";
 
 import type { Service } from "@/data/services";
-import { zoneHref, getZoneBySlug } from "@/data/zones";
+import { zoneHref } from "@/data/zones";
 import { SITE, telHref } from "@/data/site";
 import { serviceSchema, breadcrumbSchema } from "@/lib/json-ld";
+import { getRelevantZonesForService } from "@/lib/maillage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { SERVICE_ICONS } from "@/components/sections/service-icons";
@@ -22,12 +23,11 @@ export function ServiceTemplate({ service }: { service: Service }) {
     { name: service.nom, url: `/services/${service.slug}` },
   ];
 
-  // Maillage croisé services ↔ zones : siège + un aperçu d'arrondissements,
+  // Maillage croisé ciblé services ↔ zones : `getRelevantZonesForService`
+  // (@/lib/maillage) croise les mots-clés du service avec `angleSerrurier`
+  // de chaque zone pour ne lier ici que celles où il est le plus demandé,
   // le reste des 22 zones restant accessible via le hub /zones.
-  const siege = getZoneBySlug("villeurbanne");
-  const zonesApercu = [siege, getZoneBySlug("lyon-3"), getZoneBySlug("lyon-6")].filter(
-    (z): z is NonNullable<typeof z> => Boolean(z),
-  );
+  const zonesApercu = getRelevantZonesForService(service);
 
   const Icon = SERVICE_ICONS[service.slug];
 
@@ -52,6 +52,16 @@ export function ServiceTemplate({ service }: { service: Service }) {
         <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
           {service.titre}
         </h1>
+
+        {/* CTA d'appel immédiat — visible sans scroll, avant tout contenu
+            rédactionnel (le CTA de fin de page reste en place en renfort). */}
+        <a
+          href={telHref}
+          className="focus-ring mt-6 inline-flex items-center gap-2 rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
+        >
+          <Phone aria-hidden="true" className="size-4" />
+          Appeler le {SITE.phone}
+        </a>
       </header>
 
       <p className="mt-6 text-lg text-foreground/80">{service.intro}</p>

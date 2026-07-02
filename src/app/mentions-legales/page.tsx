@@ -40,10 +40,9 @@ export default function MentionsLegalesPage() {
       <section className="mt-8 space-y-2 text-foreground/80">
         <h2 className="text-xl font-bold">Éditeur du site</h2>
         <p>Raison sociale : {SITE.name}</p>
-        {/* À COMPLÉTER PAR LE CLIENT */}
         <p>Forme juridique : Entrepreneur individuel</p>
         {/* À COMPLÉTER PAR LE CLIENT */}
-        <p>Capital social (le cas échéant) : À COMPLÉTER PAR LE CLIENT</p>
+        <p>Capital social (le cas échéant) : Aucun</p>
         <p>Adresse du siège : {addressInline}</p>
         <p>
           Téléphone :{" "}
@@ -57,7 +56,6 @@ export default function MentionsLegalesPage() {
             {SITE.email}
           </a>
         </p>
-        {/* À COMPLÉTER PAR LE CLIENT */}
         <p>Numéro SIRET : 45359868200046</p>
         {/* À COMPLÉTER PAR LE CLIENT */}
         <p>
@@ -65,7 +63,7 @@ export default function MentionsLegalesPage() {
           CLIENT
         </p>
         {/* À COMPLÉTER PAR LE CLIENT */}
-        <p>Numéro de TVA intracommunautaire (le cas échéant) : À COMPLÉTER PAR LE CLIENT</p>
+        <p>Numéro de TVA intracommunautaire (le cas échéant) : FR33453598682</p>
         {/* À COMPLÉTER PAR LE CLIENT */}
         <p>Directeur de la publication : À COMPLÉTER PAR LE CLIENT</p>
       </section>
