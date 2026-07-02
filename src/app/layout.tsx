@@ -66,16 +66,10 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * Zoom utilisateur désactivé (`maximumScale: 1, userScalable: false`) : le
- * design (CTA plein écran, bouton flottant) est pensé pour une largeur fixe
- * device-width — un pinch-zoom laisse voir du vide au-delà du contenu rendu.
- */
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
