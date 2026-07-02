@@ -14,7 +14,7 @@ import { services, serviceHref } from "@/data/services";
 import { arrondissements, zoneHref, getZoneBySlug } from "@/data/zones";
 import { reviews, averageRating, reviewCount } from "@/data/reviews";
 import { faq } from "@/data/faq";
-import { localBusinessSchema, faqSchema } from "@/lib/json-ld";
+import { faqSchema } from "@/lib/json-ld";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { SERVICE_ICONS } from "@/components/sections/service-icons";
 import { HeroBackground } from "@/components/sections/HeroBackground";
@@ -47,9 +47,9 @@ export default function Home() {
 
   return (
     <>
-      <JsonLd
-        schema={[localBusinessSchema(), faqSchema(breadcrumbFaqItems)]}
-      />
+      {/* LocalBusiness déjà injecté globalement par le layout (src/app/layout.tsx) —
+          ne pas le répéter ici (même @id en double sur la page). */}
+      <JsonLd schema={faqSchema(breadcrumbFaqItems)} />
 
       {/* Hero — texte 100% Server Component, dans le HTML initial (LCP).
           Le parallaxe (ParallaxHero) n'anime que transform/opacity côté

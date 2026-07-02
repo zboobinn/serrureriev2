@@ -34,9 +34,8 @@ export const SITE = {
    * `geo` que si ces valeurs sont renseignées (pas de donnée inventée).
    */
   geo: {
-    // À COMPLÉTER PAR LE CLIENT (latitude/longitude exactes du 62 rue Racine)
-    latitude: null as number | null,
-    longitude: null as number | null,
+    latitude: 45.765645 as number | null,
+    longitude: 4.8778926 as number | null,
   },
 
   /** Année de création de l'entreprise. */

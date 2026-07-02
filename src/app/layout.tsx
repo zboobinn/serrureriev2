@@ -16,6 +16,18 @@ const geistSans = Geist({
   display: "swap",
 });
 
+/**
+ * Image de partage par défaut (Open Graph / Twitter). Fichier statique dans
+ * `public/`, résolu en URL absolue via `metadataBase`. Design sobre aux
+ * couleurs du site (fond sombre, or), sans photo stock.
+ */
+const ogImage = {
+  url: "/og-image.png",
+  width: 1200,
+  height: 630,
+  alt: `${SITE.name} — serrurier 24/7 à Lyon et dans le Grand Lyon`,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
@@ -38,6 +50,15 @@ export const metadata: Metadata = {
       "Dépannage serrurerie d'urgence, portes blindées et serrures haute " +
       "sécurité à Lyon et dans le Grand Lyon.",
     url: "/",
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE.name} — Serrurier à Lyon 24h/24 7j/7`,
+    description:
+      "Dépannage serrurerie d'urgence, portes blindées et serrures haute " +
+      "sécurité à Lyon et dans le Grand Lyon.",
+    images: [ogImage],
   },
   robots: {
     index: true,

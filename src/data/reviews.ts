@@ -4,8 +4,13 @@
  * Source unique et figée : ces 10 avis (tous notés 5/5) proviennent de
  * PROMPT-DEMARRAGE.md, fautes de frappe évidentes corrigées sans changer le
  * sens. NE PAS EN AJOUTER, NE PAS EN INVENTER — c'est la seule source de
- * vérité pour l'affichage des avis et pour l'`AggregateRating` JSON-LD
- * (ratingValue 5, reviewCount 10).
+ * vérité pour l'affichage visuel des avis (accueil).
+ *
+ * ⚠️ Ces avis sont affichés mais volontairement NON balisés en JSON-LD
+ * (pas d'`AggregateRating`/`Review`) : ce sont des avis Google recopiés
+ * manuellement, pas des avis first-party collectés sur ce site. Voir
+ * CLAUDE.md et SEO-GUIDE.md pour la justification, et @/lib/json-ld pour le
+ * bloc de réactivation laissé en commentaire.
  */
 
 export interface Review {

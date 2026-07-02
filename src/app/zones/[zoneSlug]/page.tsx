@@ -6,7 +6,7 @@ import { MapPin, Phone } from "lucide-react";
 import { allZoneSlugs, zoneHref, getLimitrophes } from "@/data/zones";
 import { SITE, telHref } from "@/data/site";
 import { zoneSlugParam, resolveZoneFromParam } from "@/lib/zone-routing";
-import { localBusinessSchema, breadcrumbSchema } from "@/lib/json-ld";
+import { breadcrumbSchema } from "@/lib/json-ld";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 
@@ -77,14 +77,10 @@ export default async function ZonePage({
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-12">
-      <JsonLd
-        schema={[
-          localBusinessSchema({
-            areaServed: [{ "@type": "City", name: zone.nomComplet }],
-          }),
-          breadcrumbSchema(breadcrumbItems),
-        ]}
-      />
+      {/* LocalBusiness déjà injecté globalement par le layout (src/app/layout.tsx) —
+          ne pas le répéter ici : un même @id avec un areaServed différent sur
+          la même page est un signal structuré ambigu pour Google. */}
+      <JsonLd schema={breadcrumbSchema(breadcrumbItems)} />
 
       <Breadcrumb items={breadcrumbItems} />
 
