@@ -1,7 +1,15 @@
+import Image from "next/image";
+
 /**
  * Fond abstrait du hero : dégradés sombres, halo doré, texture "métal
- * brossé" (bandes CSS très fines) et silhouette de serrure en SVG inline.
- * 100% décoratif (`aria-hidden`), aucune image téléchargée — zéro coût LCP.
+ * brossé" (bandes CSS très fines) et photo du trou de serrure en laiton.
+ * 100% décoratif (`aria-hidden` / alt vide).
+ *
+ * Fondu de la photo : son fond est noir pur, donc `mix-blend-mode: screen`
+ * rend ce noir totalement transparent (il n'ajoute rien au fond) — seul le
+ * contour laiton et la lumière du trou ressortent, sans aucune bordure
+ * visible. Un masque en dégradé sur les bords dissout la découpe pour un
+ * fondu parfait dans le fond gris brossé.
  */
 export function HeroBackground() {
   return (
@@ -21,20 +29,16 @@ export function HeroBackground() {
         }}
       />
 
-      {/* Silhouette de serrure stylisée */}
-      <svg
-        viewBox="0 0 200 320"
-        className="absolute top-1/2 right-[2%] h-[70%] w-auto -translate-y-1/2 opacity-[0.12] sm:right-[6%]"
-      >
-        <circle cx="100" cy="90" r="68" stroke="var(--accent)" strokeWidth="2" fill="none" />
-        <path
-          d="M72 158 L128 158 L152 296 L48 296 Z"
-          stroke="var(--accent)"
-          strokeWidth="2"
-          fill="none"
-          strokeLinejoin="round"
-        />
-      </svg>
+      {/* Photo du trou de serrure — fondu par mix-blend screen + masque bords */}
+      <Image
+        src="/serrure-hero.jpg"
+        alt=""
+        width={736}
+        height={1308}
+        priority
+        sizes="(max-width: 640px) 45vw, 34rem"
+        className="pointer-events-none absolute top-0 right-[5%] h-full w-auto object-contain object-top opacity-35 mix-blend-screen select-none mask-[linear-gradient(to_left,black_55%,transparent),linear-gradient(to_bottom,black_75%,transparent)] mask-intersect"
+      />
 
       {/* Fondu vers le bas pour ancrer la section suivante */}
       <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-background to-transparent" />

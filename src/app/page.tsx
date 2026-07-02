@@ -162,53 +162,57 @@ export default function Home() {
         </ul>
       </section>
 
-      {/* Zones desservies */}
-      <section className="mx-auto max-w-6xl px-4 py-16">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <Reveal>
-            <div>
-              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                Nos zones d&apos;intervention
-              </h2>
-              <p className="mt-4 max-w-2xl text-foreground/70">
-                Établis à Villeurbanne, nous intervenons dans les 9
-                arrondissements de Lyon et dans l&apos;ensemble des communes du
-                Grand Lyon.
-              </p>
-              <ul className="mt-6 flex flex-wrap gap-3">
-                {siege && (
-                  <li>
-                    <Link
-                      href={zoneHref(siege)}
-                      className="focus-ring rounded-pill border border-accent-strong bg-surface px-4 py-2 text-sm font-semibold text-accent-strong transition-colors hover:bg-background"
-                    >
-                      {siege.nom} (siège)
-                    </Link>
-                  </li>
-                )}
-                {arrondissements.map((z) => (
-                  <li key={z.slug}>
-                    <Link
-                      href={zoneHref(z)}
-                      className="focus-ring rounded-pill border border-border bg-surface px-4 py-2 text-sm transition-colors hover:border-accent-strong"
-                    >
-                      {z.nom}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/zones"
-                className="focus-ring mt-6 inline-block rounded-sm font-semibold text-accent-strong underline-offset-2 hover:underline"
-              >
-                Voir toutes nos zones (Lyon + Grand Lyon) →
-              </Link>
-            </div>
-          </Reveal>
+      {/* Zones desservies — bande pleine largeur sur un fond "surface" pour
+          rompre le rythme de la page (le reste des sections repose sur
+          --background). */}
+      <section className="bg-surface py-16">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <Reveal>
+              <div>
+                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                  Nos zones d&apos;intervention
+                </h2>
+                <p className="mt-4 max-w-2xl text-foreground/70">
+                  Établis à Villeurbanne, nous intervenons dans les 9
+                  arrondissements de Lyon et dans l&apos;ensemble des communes
+                  du Grand Lyon.
+                </p>
+                <ul className="mt-6 flex flex-wrap gap-3">
+                  {siege && (
+                    <li>
+                      <Link
+                        href={zoneHref(siege)}
+                        className="focus-ring rounded-pill border border-accent-strong bg-background px-4 py-2 text-sm font-semibold text-accent-strong transition-colors hover:bg-surface-2"
+                      >
+                        {siege.nom} (siège)
+                      </Link>
+                    </li>
+                  )}
+                  {arrondissements.map((z) => (
+                    <li key={z.slug}>
+                      <Link
+                        href={zoneHref(z)}
+                        className="focus-ring rounded-pill border border-border bg-background px-4 py-2 text-sm transition-colors hover:border-accent-strong"
+                      >
+                        {z.nom}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="/zones"
+                  className="focus-ring mt-6 inline-block rounded-sm font-semibold text-accent-strong underline-offset-2 hover:underline"
+                >
+                  Voir toutes nos zones (Lyon + Grand Lyon) →
+                </Link>
+              </div>
+            </Reveal>
 
-          <Reveal delay={0.1} className="hidden lg:block">
-            <ZoneMap />
-          </Reveal>
+            <Reveal delay={0.1} className="hidden lg:block">
+              <ZoneMap />
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -315,20 +319,23 @@ export default function Home() {
       </section>
 
       {/* Formulaire de devis — même composant que /contact (Client Component
-          isolé à l'interactivité du formulaire, reste du contenu inchangé). */}
-      <section className="mx-auto max-w-3xl px-4 py-16">
-        <Reveal>
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            Demander un devis gratuit
-          </h2>
-          <p className="mt-4 text-foreground/70">
-            Décrivez votre besoin, nous vous recontactons rapidement — pour
-            une urgence, appelez-nous directement.
-          </p>
-          <div className="mt-8 rounded-card border border-border bg-surface p-6 shadow-card sm:p-8">
-            <ContactForm />
-          </div>
-        </Reveal>
+          isolé à l'interactivité du formulaire, reste du contenu inchangé).
+          Même traitement de fond pleine largeur que la section Zones. */}
+      <section className="bg-surface py-16">
+        <div className="mx-auto max-w-3xl px-4">
+          <Reveal>
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              Demander un devis gratuit
+            </h2>
+            <p className="mt-4 text-foreground/70">
+              Décrivez votre besoin, nous vous recontactons rapidement — pour
+              une urgence, appelez-nous directement.
+            </p>
+            <div className="mt-8 rounded-card border border-border bg-background p-6 shadow-card sm:p-8">
+              <ContactForm />
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* FAQ — identique au JSON-LD FAQPage ci-dessus */}
