@@ -279,8 +279,8 @@ export default function Home() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <div className="mt-6 flex flex-wrap items-center gap-6 rounded-card border border-border bg-surface p-6">
-            <p className="text-5xl font-bold tracking-tight text-accent-strong">
+          <div className="mt-6 flex items-center gap-4 rounded-card border border-border bg-surface p-6 sm:gap-6">
+            <p className="text-3xl font-bold tracking-tight text-accent-strong sm:text-5xl">
               {averageRating}/5
             </p>
             <div>
