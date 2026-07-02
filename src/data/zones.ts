@@ -1,6 +1,6 @@
 /**
  * Données des zones d'intervention — Serrurerie Roland
- * Siège : 62 rue Racine, 69100 Villeurbanne (intervention Lyon + Grand Lyon)
+ * Siège : 60 rue Racine, 69100 Villeurbanne (intervention Lyon + Grand Lyon)
  *
  * Objectif SEO : une landing page par zone, avec un contenu UNIQUE.
  * Le champ `angleSerrurier` + `caractere` + `typeBati` servent à faire varier

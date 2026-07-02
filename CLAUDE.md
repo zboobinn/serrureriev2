@@ -7,7 +7,7 @@ JSON-LD), CONTENT-STRATEGY.md (mots-clés), DEPLOYMENT.md (mise en ligne).
 Lis-les au besoin plutôt que de tout charger.
 
 NAP source unique : src/data/site.ts — Serrurerie Roland, 06 68 67 65 65,
-siège 62 rue Racine 69100 Villeurbanne, depuis 1998, 24/7.
+siège 60 rue Racine 69100 Villeurbanne, depuis 1998, 24/7.
 
 ## Pièges à NE PAS défaire
 - Avis (data/reviews.ts) : affichés mais VOLONTAIREMENT non balisés en

@@ -17,7 +17,7 @@ Refonte du site d'un artisan serrurier réel à Lyon. L'ancien site est sous Wor
 - **Entreprise** : Serrurerie Roland
 - **Téléphone** : 06 68 67 65 65
 - **Email** : serrurerieroland@orange.fr
-- **Adresse (siège)** : 62 rue Racine, 69100 Villeurbanne
+- **Adresse (siège)** : 60 rue Racine, 69100 Villeurbanne
 - **Année de création** : 1998
 - **Disponibilité** : 24h/24, 7j/7
 - **Zone d'intervention** : Lyon, ses 9 arrondissements et le Grand Lyon (l'entreprise est établie à Villeurbanne et intervient en *service area* sur tout Lyon et le Grand Lyon)

@@ -20,7 +20,7 @@ export const SITE = {
 
   /** Adresse du siège (établissement à Villeurbanne). */
   address: {
-    street: "62 rue Racine",
+    street: "60 rue Racine",
     postalCode: "69100",
     city: "Villeurbanne",
     /** Code pays ISO 3166-1 alpha-2. */

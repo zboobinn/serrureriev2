@@ -88,42 +88,8 @@ export default function Home() {
         </section>
       </ParallaxHero>
 
-      {/* Services */}
-      <section className="mx-auto max-w-6xl px-4 py-16">
-        <Reveal>
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            Nos services de serrurerie
-          </h2>
-        </Reveal>
-        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => {
-            const Icon = SERVICE_ICONS[service.slug];
-            return (
-              <li key={service.slug}>
-                <Reveal delay={Math.min(i, 5) * 0.06}>
-                  <Link
-                    href={serviceHref(service)}
-                    className="focus-ring group block h-full rounded-card border border-border bg-background p-6 shadow-card transition-[transform,box-shadow,border-color] hover:-translate-y-1 hover:border-accent-strong hover:shadow-card-hover"
-                  >
-                    {Icon && (
-                      <span className="inline-flex size-11 items-center justify-center rounded-full border border-accent-strong/30 bg-surface text-accent-strong">
-                        <Icon aria-hidden="true" className="size-5" />
-                      </span>
-                    )}
-                    <h3 className="mt-4 text-lg font-bold">{service.nom}</h3>
-                    <p className="mt-2 text-sm text-foreground/70">
-                      {service.description}
-                    </p>
-                  </Link>
-                </Reveal>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-
       {/* Bandeau de confiance : assurances partenaires + certification matériel */}
-      <section className="mx-auto max-w-6xl px-4">
+      <section className="mx-auto max-w-6xl px-4 pt-16">
         <Reveal>
           <div className="grid gap-8 rounded-card border border-border bg-surface p-8 sm:grid-cols-3 sm:items-center sm:divide-x sm:divide-border">
             <div className="flex items-start gap-3">
@@ -160,6 +126,40 @@ export default function Home() {
             </div>
           </div>
         </Reveal>
+      </section>
+
+      {/* Services */}
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <Reveal>
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            Nos services de serrurerie
+          </h2>
+        </Reveal>
+        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service, i) => {
+            const Icon = SERVICE_ICONS[service.slug];
+            return (
+              <li key={service.slug}>
+                <Reveal delay={Math.min(i, 5) * 0.06}>
+                  <Link
+                    href={serviceHref(service)}
+                    className="focus-ring group block h-full rounded-card border border-border bg-background p-6 shadow-card transition-[transform,box-shadow,border-color] hover:-translate-y-1 hover:border-accent-strong hover:shadow-card-hover"
+                  >
+                    {Icon && (
+                      <span className="inline-flex size-11 items-center justify-center rounded-full border border-accent-strong/30 bg-surface text-accent-strong">
+                        <Icon aria-hidden="true" className="size-5" />
+                      </span>
+                    )}
+                    <h3 className="mt-4 text-lg font-bold">{service.nom}</h3>
+                    <p className="mt-2 text-sm text-foreground/70">
+                      {service.description}
+                    </p>
+                  </Link>
+                </Reveal>
+              </li>
+            );
+          })}
+        </ul>
       </section>
 
       {/* Zones desservies */}
