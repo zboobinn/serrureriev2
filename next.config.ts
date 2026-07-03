@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { GOOGLE_REVIEW_URL } from "./src/data/site";
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -59,6 +60,14 @@ const nextConfig: NextConfig = {
         source: "/types-de-serrures-avantages-inconvenients",
         destination: "/services/serrures-haute-securite",
         permanent: true,
+      },
+      {
+        // Lien de marque vers la page d'avis Google. 307 volontairement
+        // temporaire : la cible peut changer (voir GOOGLE_REVIEW_URL dans
+        // src/data/site.ts, source de vérité).
+        source: "/avis",
+        destination: GOOGLE_REVIEW_URL,
+        permanent: false,
       },
     ];
   },

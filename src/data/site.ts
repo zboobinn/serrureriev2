@@ -88,6 +88,9 @@ export const SITE = {
   },
 } as const;
 
+/** URL de la page d'avis Google (redirection de marque /avis). */
+export const GOOGLE_REVIEW_URL = "https://g.page/r/CdgvSI6BXBCJEBM/review";
+
 /** Lien clic-to-call prêt à l'emploi (href="tel:..."). */
 export const telHref = `tel:${SITE.phoneE164}`;
 
