@@ -1,5 +1,6 @@
 import {
   ClipboardCheck,
+  Fence,
   Lock,
   PanelTop,
   ShieldCheck,
@@ -17,6 +18,7 @@ export const SERVICE_ICONS: Record<string, LucideIcon> = {
   "depannage-urgent": Wrench,
   "portes-blindees": ShieldCheck,
   "portes-de-garage": Warehouse,
+  "fermetures-exterieures": Fence,
   "rideaux-metalliques": PanelTop,
   "serrures-haute-securite": Lock,
   "conseil-en-securite": ClipboardCheck,

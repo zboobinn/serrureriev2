@@ -68,6 +68,7 @@ export function Footer() {
           <ul className="mt-3 space-y-2 text-sm">
             <li><Link href="/services/depannage-urgent" className="focus-ring-invert rounded-sm transition-colors hover:text-accent">Dépannage urgent</Link></li>
             <li><Link href="/services/portes-blindees" className="focus-ring-invert rounded-sm transition-colors hover:text-accent">Portes blindées</Link></li>
+            <li><Link href="/services/fermetures-exterieures" className="focus-ring-invert rounded-sm transition-colors hover:text-accent">Fermetures extérieures</Link></li>
             <li><Link href="/services/serrures-haute-securite" className="focus-ring-invert rounded-sm transition-colors hover:text-accent">Serrures haute sécurité</Link></li>
             <li><Link href="/services" className="focus-ring-invert rounded-sm transition-colors hover:text-accent">Tous les services</Link></li>
           </ul>

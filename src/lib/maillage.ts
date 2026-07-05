@@ -29,6 +29,7 @@ const SERVICE_KEYWORDS: Record<string, string[]> = {
   ],
   "portes-blindees": ["porte blindée", "portes blindées", "blindage", "blindé"],
   "portes-de-garage": ["porte de garage", "portes de garage"],
+  "fermetures-exterieures": ["portail", "portails", "clôture", "clôtures", "portillon"],
   "rideaux-metalliques": ["rideau métallique", "rideaux métalliques"],
   "serrures-haute-securite": [
     "haute sécurité",

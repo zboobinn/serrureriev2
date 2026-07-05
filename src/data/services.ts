@@ -99,6 +99,25 @@ export const services: Service[] = [
       "Propriétaires de maison individuelle et gestionnaires de locaux d'activité équipés d'une porte de garage.",
   },
   {
+    slug: "fermetures-exterieures",
+    nom: "Fermetures extérieures",
+    titre: "Portails et fermetures extérieures à Lyon",
+    metaTitre: "Portails et clôtures : pose Lyon",
+    description:
+      "Pose de portails battants ou coulissants, motorisation et clôtures à Lyon et dans le Grand Lyon : fermeture de propriété sur mesure pour maisons individuelles.",
+    intro:
+      "Un portail ou une clôture bien posés sont la première protection d'une maison individuelle, avant même la porte d'entrée. Nous étudions votre terrain et vos accès pour proposer une fermeture de propriété adaptée, motorisée ou non, sans mauvaise surprise à la pose.",
+    prestations: [
+      "Pose de portails battants ou coulissants, sur mesure ou standard",
+      "Motorisation de portail neuf ou existant",
+      "Installation de clôtures et de portillons assortis",
+      "Fermeture complète de propriété (portail, clôture, accès piéton)",
+      "Remplacement de serrures et gâches de portail",
+    ],
+    pourQui:
+      "Propriétaires de maison individuelle souhaitant sécuriser et fermer leur propriété, ou motoriser un portail existant.",
+  },
+  {
     slug: "rideaux-metalliques",
     nom: "Rideaux métalliques",
     titre: "Rideaux métalliques : installation et réparation à Lyon",

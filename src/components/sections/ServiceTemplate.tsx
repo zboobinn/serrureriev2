@@ -16,7 +16,18 @@ import { SERVICE_ICONS } from "@/components/sections/service-icons";
  * son propre contenu rédigé à la main dans `@/data/services.ts` — ce
  * composant ne fait que factoriser la mise en page et le balisage commun.
  */
-export function ServiceTemplate({ service }: { service: Service }) {
+export function ServiceTemplate({
+  service,
+  children,
+}: {
+  service: Service;
+  /**
+   * Contenu additionnel propre à une page service précise (ex. timelapse de
+   * chantier), affiché après "Pour qui ?" et avant le bloc CTA. Absent pour
+   * les autres pages service — ne change rien à leur rendu.
+   */
+  children?: React.ReactNode;
+}) {
   const breadcrumbItems = [
     { name: "Accueil", url: "/" },
     { name: "Services", url: "/services" },
@@ -82,6 +93,8 @@ export function ServiceTemplate({ service }: { service: Service }) {
         <h2 className="text-xl font-bold">Pour qui ?</h2>
         <p className="mt-3 text-foreground/80">{service.pourQui}</p>
       </section>
+
+      {children}
 
       <section className="mt-10 flex flex-wrap gap-4 rounded-card border border-border bg-surface p-6">
         <a

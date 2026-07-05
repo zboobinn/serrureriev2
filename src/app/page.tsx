@@ -22,6 +22,10 @@ import { ZoneMap } from "@/components/sections/ZoneMap";
 import { ParallaxHero } from "@/components/motion/ParallaxHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "@/components/sections/ContactForm";
+import {
+  ChantierTimelapse,
+  chantierPortailVilleurbanne,
+} from "@/components/sections/ChantierTimelapse";
 
 /*
  * Accueil — 100 % Server Component, aucun contenu critique en client-side
@@ -214,6 +218,24 @@ export default function Home() {
             </Reveal>
           </div>
         </div>
+      </section>
+
+      {/* Timelapse de chantier — composant "use client" isolé (slider
+          interactif), inséré dans cette page Server Component sans en
+          changer la nature globale. */}
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <Reveal>
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            Un chantier en images : pose d&apos;un portail
+          </h2>
+          <p className="mt-4 max-w-2xl text-foreground/70">
+            Faites glisser le curseur pour suivre les étapes de la pose d&apos;un
+            portail, de l&apos;emplacement avant travaux jusqu&apos;à la finition.
+          </p>
+        </Reveal>
+        <Reveal delay={0.08} className="mt-8">
+          <ChantierTimelapse chantiers={[chantierPortailVilleurbanne]} />
+        </Reveal>
       </section>
 
       {/* Pourquoi nous */}
