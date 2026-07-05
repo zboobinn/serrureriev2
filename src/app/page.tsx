@@ -299,8 +299,14 @@ export default function Home() {
           Bande défilante en CSS pur (overflow-x + scroll-snap) : les 10 avis
           restent une <ul>/<li> normale dans le flux HTML, indexable, sans
           JS. Pas de librairie carrousel.
+
+          `contain:layout` est nécessaire (pas juste décoratif) : sans lui,
+          la largeur cumulée des <li> (~3000px) fuit dans le scrollWidth du
+          document malgré `overflow-x-auto` ici et `overflow-x:hidden/clip`
+          sur html/body — testé en conditions réelles (incident scroll
+          horizontal fantôme sur mobile, zone vide à droite du contenu).
         */}
-        <ul className="mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 scrollbar-thin">
+        <ul className="mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 scrollbar-thin [contain:layout]">
           {reviews.map((review) => (
             <li
               key={review.id}
