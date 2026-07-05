@@ -10,13 +10,13 @@ import {
 } from "lucide-react";
 
 import { SITE, telHref } from "@/data/site";
-import { services, serviceHref } from "@/data/services";
+import { services } from "@/data/services";
 import { arrondissements, zoneHref, getZoneBySlug } from "@/data/zones";
 import { reviews, averageRating, reviewCount } from "@/data/reviews";
 import { faq } from "@/data/faq";
 import { faqSchema } from "@/lib/json-ld";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SERVICE_ICONS } from "@/components/sections/service-icons";
+import { ServicesShowcase } from "@/components/sections/ServicesShowcase";
 import { HeroBackground } from "@/components/sections/HeroBackground";
 import { ZoneMap } from "@/components/sections/ZoneMap";
 import { ParallaxHero } from "@/components/motion/ParallaxHero";
@@ -139,31 +139,9 @@ export default function Home() {
             Nos services de serrurerie
           </h2>
         </Reveal>
-        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => {
-            const Icon = SERVICE_ICONS[service.slug];
-            return (
-              <li key={service.slug}>
-                <Reveal delay={Math.min(i, 5) * 0.06}>
-                  <Link
-                    href={serviceHref(service)}
-                    className="focus-ring group block h-full rounded-card border border-border bg-background p-6 shadow-card transition-[transform,box-shadow,border-color] hover:-translate-y-1 hover:border-accent-strong hover:shadow-card-hover"
-                  >
-                    {Icon && (
-                      <span className="inline-flex size-11 items-center justify-center rounded-full border border-accent-strong/30 bg-surface text-accent-strong">
-                        <Icon aria-hidden="true" className="size-5" />
-                      </span>
-                    )}
-                    <h3 className="mt-4 text-lg font-bold">{service.nom}</h3>
-                    <p className="mt-2 text-sm text-foreground/70">
-                      {service.description}
-                    </p>
-                  </Link>
-                </Reveal>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="mt-8">
+          <ServicesShowcase services={services} headingLevel="h3" />
+        </div>
       </section>
 
       {/* Zones desservies — bande pleine largeur sur un fond "surface" pour
