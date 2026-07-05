@@ -9,6 +9,24 @@ import {
 import { arrondissements, communes, zoneHref } from "@/data/zones";
 
 /**
+ * Footer : on ne liste que les 6 communes principales (siège + les plus
+ * demandées) pour garder une colonne équilibrée — les 26 communes restent
+ * toutes générées et indexées (sitemap, hub /zones), seul l'affichage ici
+ * est restreint. Voir /zones pour la liste complète.
+ */
+const COMMUNES_FOOTER_SLUGS = [
+  "villeurbanne",
+  "caluire-et-cuire",
+  "bron",
+  "venissieux",
+  "vaulx-en-velin",
+  "saint-priest",
+];
+const communesFooter = COMMUNES_FOOTER_SLUGS.map((slug) =>
+  communes.find((z) => z.slug === slug),
+).filter((z): z is NonNullable<typeof z> => Boolean(z));
+
+/**
  * Pied de page global : NAP complet (cohérence SEO local), navigation
  * secondaire, maillage vers les zones, liens légaux.
  */
@@ -77,13 +95,21 @@ export function Footer() {
             Grand Lyon
           </h2>
           <ul className="mt-3 space-y-2 text-sm">
-            {communes.map((z) => (
+            {communesFooter.map((z) => (
               <li key={z.slug}>
                 <Link href={zoneHref(z)} className="focus-ring-invert rounded-sm transition-colors hover:text-accent">
                   {z.nom}
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="/zones"
+                className="focus-ring-invert rounded-sm font-semibold text-accent transition-colors hover:text-accent/80"
+              >
+                Toutes nos zones →
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
