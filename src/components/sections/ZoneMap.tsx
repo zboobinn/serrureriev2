@@ -1,4 +1,4 @@
-import { arrondissements, communes } from "@/data/zones";
+import { arrondissements, communesGrandLyon } from "@/data/zones";
 
 /**
  * Carte stylisée illustrative de la zone d'intervention — pas une carte
@@ -9,7 +9,7 @@ import { arrondissements, communes } from "@/data/zones";
  */
 export function ZoneMap() {
   const innerCount = arrondissements.length;
-  const outerCount = communes.length;
+  const outerCount = communesGrandLyon.length;
 
   const innerDots = Array.from({ length: innerCount }, (_, i) => {
     const angle = (i / innerCount) * 2 * Math.PI - Math.PI / 2;

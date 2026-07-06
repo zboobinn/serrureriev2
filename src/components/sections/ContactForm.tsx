@@ -3,7 +3,16 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 
-import { arrondissements, communes } from "@/data/zones";
+import {
+  arrondissements,
+  communesGrandLyon,
+  zonesBySecteurGeo,
+  SECTEUR_GEO_LABELS,
+} from "@/data/zones";
+
+const zonesEstNordIsere = zonesBySecteurGeo("est-nord-isere");
+const zonesSudLyonnais = zonesBySecteurGeo("sud-lyonnais");
+const zonesSecteurVienne = zonesBySecteurGeo("secteur-vienne");
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -150,8 +159,29 @@ export function ContactForm() {
               </option>
             ))}
           </optgroup>
-          <optgroup label="Grand Lyon">
-            {communes.map((z) => (
+          <optgroup label={SECTEUR_GEO_LABELS["grand-lyon"]}>
+            {communesGrandLyon.map((z) => (
+              <option key={z.slug} value={z.nom}>
+                {z.nom}
+              </option>
+            ))}
+          </optgroup>
+          <optgroup label={SECTEUR_GEO_LABELS["est-nord-isere"]}>
+            {zonesEstNordIsere.map((z) => (
+              <option key={z.slug} value={z.nom}>
+                {z.nom}
+              </option>
+            ))}
+          </optgroup>
+          <optgroup label={SECTEUR_GEO_LABELS["sud-lyonnais"]}>
+            {zonesSudLyonnais.map((z) => (
+              <option key={z.slug} value={z.nom}>
+                {z.nom}
+              </option>
+            ))}
+          </optgroup>
+          <optgroup label={SECTEUR_GEO_LABELS["secteur-vienne"]}>
+            {zonesSecteurVienne.map((z) => (
               <option key={z.slug} value={z.nom}>
                 {z.nom}
               </option>
