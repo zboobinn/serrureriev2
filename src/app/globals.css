@@ -14,6 +14,33 @@
  *   surface      : panneaux/cartes élevés par rapport au fond (niveau 1)
  *   surface-2    : élévation supplémentaire (niveau 2)
  *   border       : bordure discrète sur fond sombre
+ *
+ * CHANGER LA COULEUR D'ACCENT DU SITE : modifier UNIQUEMENT les 4 lignes
+ * --accent / --accent-foreground / --accent-strong / --accent-muted
+ * ci-dessous. Tout le reste du site (boutons, liens, icônes, halos/glow
+ * d'ombre, focus ring clavier) consomme ces 4 tokens — via les utilitaires
+ * Tailwind text-accent/bg-accent/border-accent-strong/etc. déclarés dans le
+ * bloc @theme inline plus bas, ou via var(--accent) directement dans ce
+ * fichier. Aucune couleur d'accent n'est codée en dur ailleurs dans le code
+ * (composants, pages) : un grep sur des hex ou classes Tailwind du type
+ * "yellow-" ou "amber-" ne doit rien remonter en dehors de ce fichier.
+ *
+ * Contrainte accessibilité (WCAG AA) à revérifier après tout changement :
+ *   --accent        : utilisé en fond de bouton/CTA avec du texte sombre
+ *                      (--accent-foreground) par-dessus → il faut un
+ *                      contraste AA (4.5:1 texte normal / 3:1 gros texte)
+ *                      entre --accent et --accent-foreground.
+ *   --accent-strong : utilisé comme couleur de TEXTE sur fond sombre
+ *                      (--background/--surface, ~#121212/#1a1a1a) → il faut
+ *                      un contraste AA (4.5:1) entre --accent-strong et ce
+ *                      fond sombre. En général --accent-strong doit être un
+ *                      poil plus clair/saturé que --accent pour bien lire en
+ *                      petit texte sur fond sombre.
+ *   --accent-muted  : bordures/icônes secondaires, pas de texte dessus →
+ *                      pas de contrainte AA stricte, viser ~60-70% de la
+ *                      luminosité de --accent.
+ * Vérifier les deux paires avec un outil de contraste (ex. WebAIM Contrast
+ * Checker) avant de livrer un changement de couleur.
  */
 :root {
   /* Chrome natif (inputs, scrollbars, date pickers…) rendu sombre par
@@ -63,11 +90,16 @@
 
   /* Sur fond sombre, l'ombre noire classique ne "lit" plus : la profondeur
      vient d'un halo doré subtil au repos, renforcé au survol (glow demandé
-     dans la direction "micro-interactions"). */
+     dans la direction "micro-interactions").
+     Syntaxe de couleur relative (`rgb(from var(--accent) …)`, CSS Color 4,
+     Chrome 119+/Safari 16.4+/Firefox 128+) : dérive le halo directement de
+     --accent au lieu de recopier son triplet RGB en dur. Changer --accent
+     dans le bloc :root suffit donc à mettre à jour ces halos aussi — un
+     seul point de déclaration pour toute la couleur d'accent. */
   --shadow-card: 0 1px 0 0 rgba(255, 255, 255, 0.04) inset, 0 16px 32px -16px rgba(0, 0, 0, 0.6);
-  --shadow-card-hover: 0 1px 0 0 rgba(255, 255, 255, 0.06) inset, 0 0 32px -4px rgba(212, 175, 55, 0.35), 0 20px 40px -16px rgba(0, 0, 0, 0.7);
-  --shadow-cta: 0 0 0 1px rgba(212, 175, 55, 0.4), 0 10px 28px -8px rgba(212, 175, 55, 0.55);
-  --shadow-glow: 0 0 40px rgba(212, 175, 55, 0.25);
+  --shadow-card-hover: 0 1px 0 0 rgba(255, 255, 255, 0.06) inset, 0 0 32px -4px rgb(from var(--accent) r g b / 0.35), 0 20px 40px -16px rgba(0, 0, 0, 0.7);
+  --shadow-cta: 0 0 0 1px rgb(from var(--accent) r g b / 0.4), 0 10px 28px -8px rgb(from var(--accent) r g b / 0.55);
+  --shadow-glow: 0 0 40px rgb(from var(--accent) r g b / 0.25);
 
   --font-sans: var(--font-geist-sans);
 }
