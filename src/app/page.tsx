@@ -57,14 +57,14 @@ export default function Home() {
           client, sans jamais re-rendre ce contenu. */}
       <ParallaxHero background={<HeroBackground />}>
         <section className="relative min-h-[85vh] px-4 pt-12 pb-16 sm:pt-20">
-          <div className="mx-auto flex min-h-[70vh] max-w-6xl flex-col justify-center">
-            <p className="inline-flex w-fit items-center gap-2 rounded-pill border border-border bg-surface/60 px-3 py-1 text-sm font-semibold uppercase tracking-wide text-accent-strong backdrop-blur">
+          <div className="mx-auto flex min-h-[70vh] max-w-6xl flex-col justify-center text-brand-foreground">
+            <p className="inline-flex w-fit items-center gap-2 rounded-pill border border-border bg-brand-surface/60 px-3 py-1 text-sm font-semibold uppercase tracking-wide text-accent backdrop-blur">
               {SITE.openingHours.label} · Depuis {SITE.foundingYear}
             </p>
             <h1 className="mt-4 max-w-2xl text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
               Serrurier à Lyon et dans le Grand Lyon
             </h1>
-            <p className="mt-4 max-w-xl text-lg text-foreground/70">
+            <p className="mt-4 max-w-xl text-lg text-brand-foreground/70">
               Dépannage d&apos;urgence, ouverture de porte, portes blindées et
               serrures haute sécurité. Intervention rapide sur les 9
               arrondissements de Lyon et le Grand Lyon, 24h/24 et 7j/7.
@@ -73,14 +73,14 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-4">
               <a
                 href={telHref}
-                className="focus-ring inline-flex items-center gap-2 rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
+                className="focus-ring-invert inline-flex items-center gap-2 rounded-pill bg-accent px-6 py-3 font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
               >
                 <Phone aria-hidden="true" className="size-4" />
                 Appeler le {SITE.phone}
               </a>
               <Link
                 href="/contact"
-                className="focus-ring rounded-pill border border-border bg-surface/60 px-6 py-3 font-semibold backdrop-blur transition-colors hover:border-accent-strong hover:bg-surface"
+                className="focus-ring-invert rounded-pill border border-border bg-brand-surface/60 px-6 py-3 font-semibold backdrop-blur transition-colors hover:border-accent-strong hover:bg-brand-surface"
               >
                 Demander un devis gratuit
               </Link>
@@ -350,10 +350,10 @@ export default function Home() {
       {/* CTA final */}
       <section className="mx-auto max-w-6xl px-4 py-16">
         <Reveal>
-          <div className="flex flex-wrap items-center justify-between gap-6 rounded-card bg-linear-to-br from-brand to-brand-2 px-8 py-10 text-foreground">
+          <div className="flex flex-wrap items-center justify-between gap-6 rounded-card bg-linear-to-br from-brand to-brand-2 px-8 py-10 text-brand-foreground">
             <div>
               <h2 className="text-2xl font-bold">Une urgence serrurerie ?</h2>
-              <p className="mt-2 text-foreground/70">
+              <p className="mt-2 text-brand-foreground/70">
                 Appelez-nous directement, nous intervenons rapidement.
               </p>
             </div>

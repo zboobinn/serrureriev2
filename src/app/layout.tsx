@@ -17,6 +17,14 @@ const geistSans = Geist({
 });
 
 /**
+ * SEULE valeur à changer pour basculer tout le site en thème clair.
+ * Réglage figé développeur (pas de bouton visiteur, pas de détection
+ * système) : "dark" applique la palette sombre actuelle (voir :root dans
+ * globals.css), "light" active la surcharge :root[data-theme="light"].
+ */
+const THEME: "dark" | "light" = "dark";
+
+/**
  * Image de partage par défaut (Open Graph / Twitter). Fichier statique dans
  * `public/`, résolu en URL absolue via `metadataBase`. Design sobre aux
  * couleurs du site (fond sombre, or), sans photo stock.
@@ -80,6 +88,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
+      data-theme={THEME}
       className={`${geistSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">

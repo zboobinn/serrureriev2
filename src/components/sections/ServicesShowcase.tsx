@@ -44,16 +44,16 @@ export function ServicesShowcase({
     <div className="space-y-6">
       {featured && (
         <Reveal>
-          <div className="rounded-card border border-accent-strong/30 bg-linear-to-br from-brand to-brand-2 p-6 shadow-card sm:p-8">
+          <div className="rounded-card border border-accent-strong/30 bg-linear-to-br from-brand to-brand-2 p-6 text-brand-foreground shadow-card sm:p-8">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
               <div>
                 <div className="flex flex-wrap items-center gap-3">
                   {FeaturedIcon && (
-                    <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-accent-strong/40 bg-surface/60 text-accent-strong backdrop-blur">
+                    <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-accent/40 bg-brand-surface/60 text-accent backdrop-blur">
                       <FeaturedIcon aria-hidden="true" className="size-6" />
                     </span>
                   )}
-                  <p className="inline-flex items-center gap-2 rounded-pill border border-border bg-surface/60 px-3 py-1 text-sm font-semibold uppercase tracking-wide text-accent-strong backdrop-blur">
+                  <p className="inline-flex items-center gap-2 rounded-pill border border-border bg-brand-surface/60 px-3 py-1 text-sm font-semibold uppercase tracking-wide text-accent backdrop-blur">
                     <Clock aria-hidden="true" className="size-4" />
                     {SITE.openingHours.label}
                   </p>
@@ -62,17 +62,17 @@ export function ServicesShowcase({
                 <Title className="mt-4 text-2xl font-bold tracking-tight sm:text-3xl">
                   <Link
                     href={serviceHref(featured)}
-                    className="focus-ring rounded-sm underline-offset-4 hover:underline"
+                    className="focus-ring-invert rounded-sm underline-offset-4 hover:underline"
                   >
                     {featured.nom}
                   </Link>
                 </Title>
-                <p className="mt-3 max-w-xl text-foreground/70">
+                <p className="mt-3 max-w-xl text-brand-foreground/70">
                   {featured.description}
                 </p>
                 <Link
                   href={serviceHref(featured)}
-                  className="focus-ring mt-4 inline-flex items-center gap-1 rounded-sm text-sm font-semibold text-accent-strong underline-offset-2 hover:underline"
+                  className="focus-ring-invert mt-4 inline-flex items-center gap-1 rounded-sm text-sm font-semibold text-accent underline-offset-2 hover:underline"
                 >
                   En savoir plus
                   <span aria-hidden="true">→</span>
@@ -81,7 +81,7 @@ export function ServicesShowcase({
 
               <a
                 href={telHref}
-                className="focus-ring inline-flex shrink-0 items-center justify-center gap-2 rounded-pill bg-accent px-6 py-3 text-center font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
+                className="focus-ring-invert inline-flex shrink-0 items-center justify-center gap-2 rounded-pill bg-accent px-6 py-3 text-center font-bold text-accent-foreground shadow-cta transition-colors hover:bg-accent/90"
               >
                 <Phone aria-hidden="true" className="size-4" />
                 Appeler le {SITE.phone}

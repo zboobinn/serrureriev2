@@ -14,7 +14,7 @@ import Image from "next/image";
 export function HeroBackground() {
   return (
     <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
-      <div className="absolute inset-0 bg-linear-to-br from-brand via-background to-brand-2" />
+      <div className="absolute inset-0 bg-linear-to-br from-brand via-brand-3 to-brand-2" />
 
       {/* Halo doré — contenu par overflow-hidden ci-dessus, ne doit jamais
           élargir la largeur de la page (cf. incident scrollbar horizontale). */}

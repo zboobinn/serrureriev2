@@ -32,7 +32,7 @@ export function StickyCallButton() {
         >
           <a
             href={telHref}
-            className="focus-ring flex w-full items-center justify-center gap-2 rounded-pill border border-accent/40 bg-brand/90 px-5 py-3 text-base font-bold text-foreground shadow-cta backdrop-blur transition-transform hover:scale-[1.02] active:scale-[0.98] sm:w-auto sm:px-6"
+            className="focus-ring-invert flex w-full items-center justify-center gap-2 rounded-pill border border-accent/40 bg-brand/90 px-5 py-3 text-base font-bold text-brand-foreground shadow-cta backdrop-blur transition-transform hover:scale-[1.02] active:scale-[0.98] sm:w-auto sm:px-6"
             aria-label={`Appeler ${SITE.name} au ${SITE.phone}`}
           >
             <Phone aria-hidden="true" className="size-5 text-accent" />

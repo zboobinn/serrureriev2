@@ -9,11 +9,11 @@ import { SITE, telHref } from "@/data/site";
  */
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-brand/85 text-foreground shadow-[0_1px_0_0_rgba(255,255,255,0.04)] backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-border bg-brand/85 text-brand-foreground shadow-[0_1px_0_0_rgba(255,255,255,0.04)] backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
         <Link href="/" className="focus-ring-invert flex min-w-0 flex-col rounded-sm leading-tight">
           <span className="truncate text-base font-bold tracking-tight sm:text-lg">{SITE.name}</span>
-          <span className="hidden truncate text-xs text-foreground/60 sm:block">
+          <span className="hidden truncate text-xs text-brand-foreground/60 sm:block">
             Serrurier à Lyon &amp; Grand Lyon · {SITE.openingHours.label}
           </span>
         </Link>

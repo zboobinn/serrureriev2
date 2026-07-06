@@ -49,24 +49,66 @@
  *                      pas de contrainte AA stricte.
  * Vérifier avec un outil de contraste (ex. WebAIM Contrast Checker) avant de
  * livrer un changement de couleur.
+ *
+ * THÈME CLAIR / SOMBRE : réglage figé développeur, pas de bouton visiteur.
+ * Un seul endroit à changer — voir la constante THEME dans
+ * src/app/layout.tsx (attribut data-theme posé sur <html>). Le sombre
+ * ci-dessous reste la valeur par défaut de :root (rendu strictement
+ * inchangé) ; le clair est une surcharge dans le bloc
+ * `:root[data-theme="light"]` plus bas, qui ne redéfinit QUE les tokens de
+ * contenu courant (background/foreground/surface/surface-2/border/
+ * accent-strong/accent-muted/ombres).
+ *
+ * Header, Hero (HeroBackground) et Footer restent volontairement une "zone
+ * marque" sombre fixe dans les DEUX thèmes (bandeau haut/bas + hero autour
+ * d'un contenu clair au milieu) : ils utilisent --brand/--brand-2/
+ * --brand-foreground, qui ne varient jamais avec le thème. Tout texte ou
+ * fond posé À L'INTÉRIEUR de cette zone marque (y compris le texte du hero,
+ * la carte "featured" de ServicesShowcase, le bloc CTA final, et
+ * StickyCallButton qui partage le même fond bg-brand) doit donc utiliser les
+ * tokens fixes (--brand-foreground, --accent, --brand-surface, --brand-3,
+ * classe .focus-ring-invert) et NE JAMAIS utiliser --foreground/--surface/
+ * --accent-strong/--border qui, eux, suivent le thème — sinon le texte
+ * deviendrait illisible une fois le thème clair activé (texte assombri sur
+ * fond resté sombre). --brand-3 et --brand-surface sont des valeurs FIXES
+ * identiques aux anciennes valeurs sombres de --background/--surface,
+ * gelées uniquement pour un usage à l'intérieur de la zone marque
+ * (gradient du hero, puces "verre dépoli" de la carte featured) — elles
+ * garantissent un rendu sombre strictement inchangé tout en restant
+ * correctes si le thème clair est activé.
  */
 :root {
   /* Chrome natif (inputs, scrollbars, date pickers…) rendu sombre par
      défaut — sinon les navigateurs affichent des contrôles de formulaire
-     clairs quel que soit le CSS applicatif. */
+     clairs quel que soit le CSS applicatif. Le thème clair reste un choix
+     figé développeur donc ce réglage reste literal ici (pas de logique
+     supplémentaire nécessaire pour l'instant). */
   color-scheme: dark;
 
   --background: #121212; /* anthracite profond */
   --foreground: #f2f0ea; /* blanc cassé chaud, pas de blanc pur */
 
-  --brand: #0a0a0a; /* noir mat, header/footer */
-  --brand-2: #171717; /* un ton au-dessus, pour la profondeur */
-  --brand-foreground: #f2f0ea;
+  --brand: #0a0a0a; /* noir mat, header/footer/hero — fixe, ne varie jamais avec le thème */
+  --brand-2: #171717; /* un ton au-dessus, pour la profondeur — fixe */
+  --brand-foreground: #f2f0ea; /* texte sur zone marque — fixe */
+  /* Fixe : ton intermédiaire pour le dégradé du hero (from-brand via-brand-3
+     to-brand-2) — valeur identique à l'ancien --background sombre, gelée
+     pour ne jamais suivre le thème (sinon le dégradé du hero afficherait
+     un ton clair en son centre une fois le thème clair activé). */
+  --brand-3: #121212;
+  /* Fixe : fond "verre dépoli" des puces posées sur la zone marque (carte
+     featured de ServicesShowcase) — valeur identique à l'ancien --surface
+     sombre, gelée pour la même raison que --brand-3. */
+  --brand-surface: #1a1a1a;
 
   --accent-base: #244dd6; /* SEULE valeur à changer pour recolorer le site */
   --accent: var(--accent-base); /* or brossé */
   --accent-foreground: #121212; /* manuel, voir commentaire ci-dessus */
-  /* or plus soutenu, texte — base assombrie de 7% (93% base / 7% noir) */
+  /* or plus soutenu, texte — base assombrie de 7% (93% base / 7% noir).
+     Ratio calibré pour du texte sur fond SOMBRE (contraste AA visé contre
+     --background/--surface sombres) — voir la surcharge plus agressive
+     dans le bloc [data-theme="light"] ci-dessous, nécessaire pour le même
+     contraste sur fond clair. */
   --accent-strong: color-mix(in srgb, var(--accent-base) 93%, black);
   /* or assourdi — bordures discrètes, icônes secondaires — base assombrie de 34% */
   --accent-muted: color-mix(in srgb, var(--accent-base) 66%, black);
@@ -74,6 +116,46 @@
   --surface: #1a1a1a;
   --surface-2: #232323;
   --border: #2a2a2a;
+}
+
+/*
+ * Thème clair — surcharge activée par data-theme="light" sur <html> (voir
+ * THEME dans layout.tsx). Ne touche QUE les tokens de contenu courant ;
+ * --brand/--brand-2/--brand-foreground/--brand-3/--brand-surface et
+ * --accent/--accent-base/--accent-foreground restent identiques dans les
+ * deux thèmes (zone marque fixe + identité de marque constante).
+ */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --background: #f6f4ee; /* blanc cassé chaud, pas de blanc pur agressif */
+  --foreground: #201d17; /* noir chaud, pas de noir pur — symétrique du foreground sombre */
+
+  --surface: #fdfcf9; /* cartes, très légèrement plus claires que le fond → élévation */
+  --surface-2: #f1ede3; /* 2ᵉ niveau d'élévation / hover */
+  --border: #e3ddce; /* bordure discrète mais visible sur fond clair */
+
+  /* Ratio bien plus agressif qu'en sombre (55% vs 93%) : nécessaire pour
+     garder un contraste AA sur fond clair avec des teintes claires type or
+     — voir le comparatif de contraste calculé en commentaire dans la
+     conversation d'implémentation. À REVÉRIFIER VISUELLEMENT si
+     --accent-base change (cf. avertissement plus haut). */
+  --accent-strong: color-mix(in srgb, var(--accent-base) 55%, black);
+  --accent-muted: color-mix(in srgb, var(--accent-base) 42%, black);
+
+  /* --shadow-card/-hover sont redéfinies ici (même nom de propriété que
+     dans @theme inline plus bas, qui reste la valeur sombre par défaut) :
+     le glint clair `rgba(255,255,255,…) inset` n'a pas de sens sur une
+     carte déjà claire, et l'ombre noire à 0.6/0.7 d'opacité est trop lourde
+     sur fond clair. --shadow-cta/--shadow-glow ne sont PAS redéfinies : le
+     glow doré (dérivé de --accent, inchangé) reste cohérent sur les deux
+     fonds. Ces deux tokens sont partagés avec les éléments de la zone
+     marque fixe (carte "featured" de ServicesShowcase) qui, eux, restent
+     sombres — cette carte perd donc son glint clair en thème clair, effet
+     cosmétique mineur à vérifier visuellement, voir le récapitulatif fourni
+     après implémentation. */
+  --shadow-card: 0 1px 0 0 rgba(0, 0, 0, 0.03) inset, 0 16px 32px -16px rgba(0, 0, 0, 0.12);
+  --shadow-card-hover: 0 1px 0 0 rgba(0, 0, 0, 0.04) inset, 0 0 32px -4px rgb(from var(--accent) r g b / 0.25), 0 20px 40px -16px rgba(0, 0, 0, 0.16);
 }
 
 /*
@@ -87,6 +169,8 @@
   --color-brand: var(--brand);
   --color-brand-2: var(--brand-2);
   --color-brand-foreground: var(--brand-foreground);
+  --color-brand-3: var(--brand-3);
+  --color-brand-surface: var(--brand-surface);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent-strong: var(--accent-strong);
@@ -153,16 +237,26 @@ textarea {
 }
 
 @layer components {
-  /* Anneau de focus clavier — un seul style : tout le site est sombre. */
+  /* Anneau de focus clavier — deux variantes depuis l'introduction du thème
+     clair : .focus-ring pour tout élément posé sur le fond courant qui suit
+     le thème (--background), .focus-ring-invert pour tout élément posé sur
+     la zone marque fixe sombre (header, footer, hero, StickyCallButton,
+     carte "featured", CTA final) via --brand-3 — identique à l'ancien
+     --background sombre, donc rendu strictement inchangé en thème sombre. */
   .focus-ring,
   .focus-ring-invert {
     outline: none;
   }
-  .focus-ring:focus-visible,
-  .focus-ring-invert:focus-visible {
+  .focus-ring:focus-visible {
     outline: none;
     box-shadow:
       0 0 0 2px var(--background),
+      0 0 0 4px var(--accent);
+  }
+  .focus-ring-invert:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--brand-3),
       0 0 0 4px var(--accent);
   }
 }
