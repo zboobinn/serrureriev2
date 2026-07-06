@@ -15,32 +15,40 @@
  *   surface-2    : élévation supplémentaire (niveau 2)
  *   border       : bordure discrète sur fond sombre
  *
- * CHANGER LA COULEUR D'ACCENT DU SITE : modifier UNIQUEMENT les 4 lignes
- * --accent / --accent-foreground / --accent-strong / --accent-muted
- * ci-dessous. Tout le reste du site (boutons, liens, icônes, halos/glow
- * d'ombre, focus ring clavier) consomme ces 4 tokens — via les utilitaires
+ * CHANGER LA COULEUR D'ACCENT DU SITE : modifier UNIQUEMENT --accent-base
+ * ci-dessous. --accent, --accent-strong et --accent-muted en sont dérivés
+ * automatiquement via color-mix() (supporté Chrome 111+/Safari 16.2+/
+ * Firefox 113+ — cohérent avec le rgb(from …) déjà utilisé plus bas pour les
+ * halos d'ombre). Tout le reste du site (boutons, liens, icônes, halos/glow
+ * d'ombre, focus ring clavier) consomme ces tokens — via les utilitaires
  * Tailwind text-accent/bg-accent/border-accent-strong/etc. déclarés dans le
  * bloc @theme inline plus bas, ou via var(--accent) directement dans ce
  * fichier. Aucune couleur d'accent n'est codée en dur ailleurs dans le code
  * (composants, pages) : un grep sur des hex ou classes Tailwind du type
  * "yellow-" ou "amber-" ne doit rien remonter en dehors de ce fichier.
  *
- * Contrainte accessibilité (WCAG AA) à revérifier après tout changement :
- *   --accent        : utilisé en fond de bouton/CTA avec du texte sombre
- *                      (--accent-foreground) par-dessus → il faut un
- *                      contraste AA (4.5:1 texte normal / 3:1 gros texte)
+ * --accent-foreground reste une valeur manuelle simple (texte sur bouton
+ * --accent) : pas de formule automatique clair/foncé selon la luminosité de
+ * la base, la logique n'apportait pas assez de valeur pour la complexité.
+ *
+ * Contrainte accessibilité (WCAG AA) À REVÉRIFIER VISUELLEMENT après TOUT
+ * changement de --accent-base — le color-mix() calcule une teinte plausible
+ * mais ne garantit pas le contraste selon la teinte choisie :
+ *   --accent        : fond de bouton/CTA avec --accent-foreground par-dessus
+ *                      → contraste AA (4.5:1 texte normal / 3:1 gros texte)
  *                      entre --accent et --accent-foreground.
- *   --accent-strong : utilisé comme couleur de TEXTE sur fond sombre
- *                      (--background/--surface, ~#121212/#1a1a1a) → il faut
- *                      un contraste AA (4.5:1) entre --accent-strong et ce
- *                      fond sombre. En général --accent-strong doit être un
- *                      poil plus clair/saturé que --accent pour bien lire en
- *                      petit texte sur fond sombre.
+ *   --accent-strong : couleur de TEXTE sur fond sombre (--background/
+ *                      --surface, ~#121212/#1a1a1a) → contraste AA (4.5:1)
+ *                      entre --accent-strong et ce fond sombre. Si une
+ *                      teinte donnée échoue, ajuster le pourcentage de
+ *                      color-mix (plus de noir mélangé = plus foncé/contrasté
+ *                      sur fond sombre... jusqu'à un certain point, une
+ *                      teinte trop sombre finit par manquer de saturation
+ *                      perçue — vérifier au cas par cas).
  *   --accent-muted  : bordures/icônes secondaires, pas de texte dessus →
- *                      pas de contrainte AA stricte, viser ~60-70% de la
- *                      luminosité de --accent.
- * Vérifier les deux paires avec un outil de contraste (ex. WebAIM Contrast
- * Checker) avant de livrer un changement de couleur.
+ *                      pas de contrainte AA stricte.
+ * Vérifier avec un outil de contraste (ex. WebAIM Contrast Checker) avant de
+ * livrer un changement de couleur.
  */
 :root {
   /* Chrome natif (inputs, scrollbars, date pickers…) rendu sombre par
@@ -55,10 +63,13 @@
   --brand-2: #171717; /* un ton au-dessus, pour la profondeur */
   --brand-foreground: #f2f0ea;
 
-  --accent: #d4af37; /* or brossé */
-  --accent-foreground: #121212;
-  --accent-strong: #c9a227; /* or plus soutenu, texte */
-  --accent-muted: #8a7434; /* or assourdi — bordures discrètes, icônes secondaires */
+  --accent-base: #244dd6; /* SEULE valeur à changer pour recolorer le site */
+  --accent: var(--accent-base); /* or brossé */
+  --accent-foreground: #121212; /* manuel, voir commentaire ci-dessus */
+  /* or plus soutenu, texte — base assombrie de 7% (93% base / 7% noir) */
+  --accent-strong: color-mix(in srgb, var(--accent-base) 93%, black);
+  /* or assourdi — bordures discrètes, icônes secondaires — base assombrie de 34% */
+  --accent-muted: color-mix(in srgb, var(--accent-base) 66%, black);
 
   --surface: #1a1a1a;
   --surface-2: #232323;
