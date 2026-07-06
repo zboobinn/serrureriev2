@@ -115,8 +115,7 @@ export default async function ZonePage({
 
       {/* Intro — ancrée sur le caractère du secteur et ses repères réels */}
       <p className="mt-6 text-lg text-foreground/80">
-        {zone.nomComplet} est {zone.type === "arrondissement" ? "un arrondissement" : "une commune"}{" "}
-        {zone.caractere}. Repères connus du secteur : {zone.pointsDeRepere.join(", ")}.
+        {zone.nom} : {zone.caractere}. Repères connus du secteur : {zone.pointsDeRepere.join(", ")}.
       </p>
 
       {/* Contenu enrichi à la main, prioritaire quand présent */}
