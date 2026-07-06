@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { MapPin } from "lucide-react";
 
 import {
   arrondissements,
   communesGrandLyon,
-  zoneHref,
   zonesBySecteurGeo,
   SECTEUR_GEO_LABELS,
   SECTEUR_GEO_ORDER,
@@ -14,6 +11,7 @@ import {
 import { breadcrumbSchema } from "@/lib/json-ld";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { ZoneSearch, type ZoneSearchGroup } from "@/components/sections/ZoneSearch";
 
 export const metadata: Metadata = {
   title: "Zones d'intervention — Lyon et Grand Lyon",
@@ -39,6 +37,20 @@ export default function ZonesPage() {
       s !== "lyon" && s !== "grand-lyon"
   );
 
+  const groups: ZoneSearchGroup[] = [
+    { key: "lyon", label: SECTEUR_GEO_LABELS.lyon, zones: arrondissements },
+    {
+      key: "grand-lyon",
+      label: SECTEUR_GEO_LABELS["grand-lyon"],
+      zones: communesGrandLyon,
+    },
+    ...secteursHorsLyon.map((secteur) => ({
+      key: secteur,
+      label: SECTEUR_GEO_LABELS[secteur],
+      zones: zonesBySecteurGeo(secteur),
+    })),
+  ].filter((group) => group.zones.length > 0);
+
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
       <JsonLd schema={breadcrumbSchema(breadcrumbItems)} />
@@ -54,67 +66,7 @@ export default function ZonesPage() {
         de nos interventions près de chez vous.
       </p>
 
-      <div className="mt-10">
-        <h2 className="text-xl font-bold">{SECTEUR_GEO_LABELS.lyon}</h2>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-3">
-          {arrondissements.map((z) => (
-            <li key={z.slug}>
-              <Link
-                href={zoneHref(z)}
-                className="focus-ring flex items-center gap-2 rounded-card border border-border bg-surface px-4 py-3 shadow-card transition-[transform,box-shadow,border-color] hover:-translate-y-0.5 hover:border-accent-strong hover:shadow-card-hover"
-              >
-                <MapPin aria-hidden="true" className="size-4 text-accent-strong" />
-                {z.nom}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="mt-10">
-        <h2 className="text-xl font-bold">{SECTEUR_GEO_LABELS["grand-lyon"]}</h2>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-3">
-          {communesGrandLyon.map((z) => (
-            <li key={z.slug}>
-              <Link
-                href={zoneHref(z)}
-                className="focus-ring flex items-center gap-2 rounded-card border border-border bg-surface px-4 py-3 shadow-card transition-[transform,box-shadow,border-color] hover:-translate-y-0.5 hover:border-accent-strong hover:shadow-card-hover"
-              >
-                <MapPin aria-hidden="true" className="size-4 text-accent-strong" />
-                {z.nom}
-                {z.siege && (
-                  <span className="ml-2 text-xs font-semibold text-accent-strong">
-                    Siège
-                  </span>
-                )}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {secteursHorsLyon.map((secteur) => {
-        const zonesDuSecteur = zonesBySecteurGeo(secteur);
-        if (zonesDuSecteur.length === 0) return null;
-        return (
-          <div key={secteur} className="mt-10">
-            <h2 className="text-xl font-bold">{SECTEUR_GEO_LABELS[secteur]}</h2>
-            <ul className="mt-4 grid gap-3 sm:grid-cols-3">
-              {zonesDuSecteur.map((z) => (
-                <li key={z.slug}>
-                  <Link
-                    href={zoneHref(z)}
-                    className="focus-ring flex items-center gap-2 rounded-card border border-border bg-surface px-4 py-3 shadow-card transition-[transform,box-shadow,border-color] hover:-translate-y-0.5 hover:border-accent-strong hover:shadow-card-hover"
-                  >
-                    <MapPin aria-hidden="true" className="size-4 text-accent-strong" />
-                    {z.nom}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        );
-      })}
+      <ZoneSearch groups={groups} />
     </section>
   );
 }

@@ -11,7 +11,7 @@ import {
 
 import { SITE, telHref } from "@/data/site";
 import { services } from "@/data/services";
-import { arrondissements, zoneHref, getZoneBySlug } from "@/data/zones";
+import { arrondissements, zones, zoneHref, getZoneBySlug } from "@/data/zones";
 import { reviews, averageRating, reviewCount } from "@/data/reviews";
 import { faq } from "@/data/faq";
 import { faqSchema } from "@/lib/json-ld";
@@ -19,6 +19,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { ServicesShowcase } from "@/components/sections/ServicesShowcase";
 import { HeroBackground } from "@/components/sections/HeroBackground";
 import { ZoneMap } from "@/components/sections/ZoneMap";
+import { ZoneQuickFilter } from "@/components/sections/ZoneQuickFilter";
 import { ParallaxHero } from "@/components/motion/ParallaxHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -156,8 +157,8 @@ export default function Home() {
                   arrondissements de Lyon et dans l&apos;ensemble des communes
                   du Grand Lyon.
                 </p>
-                <ul className="mt-6 flex flex-wrap gap-x-2 gap-y-5">
-                  {siege && (
+                {siege && (
+                  <ul className="mt-6 flex flex-wrap gap-x-2 gap-y-5">
                     <li>
                       <Link
                         href={zoneHref(siege)}
@@ -166,7 +167,10 @@ export default function Home() {
                         {siege.nom} (siège)
                       </Link>
                     </li>
-                  )}
+                  </ul>
+                )}
+                <ZoneQuickFilter zones={zones} />
+                <ul className="mt-4 flex flex-wrap gap-x-2 gap-y-2">
                   {arrondissements.map((z) => (
                     <li key={z.slug}>
                       <Link
