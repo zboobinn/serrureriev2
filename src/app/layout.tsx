@@ -48,6 +48,9 @@ export const metadata: Metadata = {
     "serrures haute sécurité. Intervention rapide sur les 9 arrondissements et " +
     "le Grand Lyon.",
   applicationName: SITE.name,
+  icons: {
+    icon: "/icon.png",
+  },
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
